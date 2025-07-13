@@ -200,6 +200,14 @@
         tanggal: "20 Februari 2025"
       }
     ];
+     {
+        nomor: "121121",
+        ditandatangani: ["Syadad Nabil Mudzafar"],
+        perihal: "Pemberitahuan Libur Sekolah",
+        ditujukan: "Seluruh Orang Tua/Wali Murid",
+        tanggal: "20 Februari 2025"
+      }
+    ];
 
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
       e.preventDefault();
