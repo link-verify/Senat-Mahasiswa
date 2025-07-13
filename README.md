@@ -416,42 +416,8 @@ CTYPE html>
     <script>
         // Data peserta sertifikat lokal
         const certificates = [
-            { nomor: '001/MPI/22E-EF/2025', nama: 'Irpan Taupik Hidayat, M. Pd.', sebagai: 'Narasumber' },
-            { nomor: '002/MPI/22E-EF/2025', nama: 'Dr. Yanti Nurdiyanti, S.Pd.I., M.M.', sebagai: 'Keynote Speaker' },
-          { nomor: '003/MPI/22E-EF/2025', nama: 'Anisa Nurahmayanti', sebagai: 'Presenter' },
-          { nomor: '004/MPI/22E-EF/2025', nama: 'Barizah Amalia', sebagai: 'Presenter' },
-          { nomor: '005/MPI/22E-EF/2025', nama: 'Diah Nurlatifah', sebagai: 'Presenter' },
-          { nomor: '006/MPI/22E-EF/2025', nama: 'Hade Yustika Prayoga', sebagai: 'Presenter' },
-          { nomor: '007/MPI/22E-EF/2025', nama: 'Ika Rostika', sebagai: 'Presenter' },
-          { nomor: '010/MPI/22E-EF/2025', nama: 'Khidayat Muslim', sebagai: 'Presenter' },
-          { nomor: '011/MPI/22E-EF/2025', nama: 'Laelatul Mutmainah', sebagai: 'Presenter' },
-          { nomor: '013/MPI/22E-EF/2025', nama: 'Mutiara Anjani', sebagai: 'Presenter' },
-          { nomor: '014/MPI/22E-EF/2025', nama: 'Nur Aziz', sebagai: 'Presenter' },
-          { nomor: '017/MPI/22E-EF/2025', nama: 'Wulandari', sebagai: 'Presenter' },
-          { nomor: '018/MPI/22E-EF/2025', nama: 'Siti Nurlaela', sebagai: 'Peserta' },
-          { nomor: '019/MPI/22E-EF/2025', nama: 'Ena Muawanah', sebagai: 'Peserta' },
-          { nomor: '020/MPI/22E-EF/2025', nama: 'Dani Ramdani', sebagai: 'Peserta' },
-          { nomor: '021/MPI/22E-EF/2025', nama: 'Ari', sebagai: 'Peserta' },
-          { nomor: '022/MPI/22E-EF/2025', nama: 'Tian Kadarisman', sebagai: 'Peserta' },
-          { nomor: '023/MPI/22E-EF/2025', nama: 'Galang Pratama Sudiar', sebagai: 'Peserta' },
-          { nomor: '024/MPI/22E-EF/2025', nama: 'Ismy Tanzilurrahmahmah', sebagai: 'Peserta' },
-          { nomor: '025/MPI/22E-EF/2025', nama: 'Fitri Wulansari', sebagai: 'Peserta' },
-          { nomor: '026/MPI/22E-EF/2025', nama: 'Fuadah Nahdiyah', sebagai: 'Peserta' },
-          { nomor: '027/MPI/22E-EF/2025', nama: 'Indah Nurfadillah', sebagai: 'Peserta' },
-          { nomor: '028/MPI/22E-EF/2025', nama: 'Henti Suhesti', sebagai: 'Peserta' },
-          { nomor: '029/MPI/22E-EF/2025', nama: 'Ismah Wardah', sebagai: 'Peserta' },
-          { nomor: '030/MPI/22E-EF/2025', nama: 'Yusianah', sebagai: 'Peserta' },
-          { nomor: '031/MPI/22E-EF/2025', nama: 'Anisa', sebagai: 'Peserta' },
-          { nomor: '032/MPI/22E-EF/2025', nama: 'Nurhayati', sebagai: 'Peserta' },
-          { nomor: '033/MPI/22E-EF/2025', nama: 'Agni Algifari', sebagai: 'Peserta' },
-          { nomor: '034/MPI/22E-EF/2025', nama: 'Salsabila A.J.', sebagai: 'Peserta' },
-          { nomor: '035/MPI/22E-EF/2025', nama: 'Ai Naufalia Satriani Putri', sebagai: 'Peserta' },
-          { nomor: '036/MPI/22E-EF/2025', nama: 'Wafa Syahla Fadiyah', sebagai: 'Peserta' },
-          { nomor: '037/MPI/22E-EF/2025', nama: 'Rachma Tsamroatullaila', sebagai: 'Peserta' },
-          { nomor: '038/MPI/22E-EF/2025', nama: 'Naisa Febrianti', sebagai: 'Peserta' },
-          { nomor: '039/MPI/22E-EF/2025', nama: 'Yulianti', sebagai: 'Peserta' },
-          { nomor: '040/MPI/22E-EF/2025', nama: 'Riani Qurrotu Aini', sebagai: 'Peserta' }
-        ];
+            { nomor: '001/MPI/22E-EF/2025', nama: 'Irpan Taupik Hidayat, M. Pd.', sebagai: 'Narasumber' }
+            ];
         window.certificatesLoaded = true;
         // Info acara (sama untuk semua)
         const eventInfo = {
