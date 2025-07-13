@@ -166,8 +166,7 @@
 
 <body>
   <header>
-    <img src="https://drive.google.com/uc?export=view&id=1RtL277zYQBcQRQ7gCeV1UhQ5o91GIMVk" alt="Logo Organisasi">
-    <h1>Verifikasi TTE Surat</h1>
+       <h1>Verifikasi TTE Surat</h1>
   </header>
 
   <main>
