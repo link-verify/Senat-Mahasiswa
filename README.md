@@ -247,7 +247,7 @@
           </table>
           <br>
           <a href="https://wa.me/085211379911?text=Nomor%20Surat%20${encodeURIComponent(surat.nomor)}%20telah%20terverifikasi." target="_blank">
-            Bagikan ke WhatsApp
+            WhatsApp
           </a>
         `;
         Swal.fire({
