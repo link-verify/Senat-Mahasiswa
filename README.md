@@ -201,7 +201,8 @@
 
   <footer>
     &copy; 2025 Senat Mahasiswa
-    <p> STITNU Al-Farabi Pangandaran. All rights reserved. </p>
+    <p> STITNU Al-Farabi Pangandaran. </p>
+      <p> All rights reserved. </p>
   </footer>
 
   <script>
