@@ -393,23 +393,22 @@
     <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 </head>
 <body>
-    <button class="dark-toggle" id="darkToggle" title="Toggle Dark Mode">ð</button>
     <div class="container">
         <div class="instansi-logo">
             <img src="https://si-aa.alfarabi.ac.id/stitnu_dell.png" alt="Logo Instansi" />
         </div>
-        <h1>Verifikasi Sertifikat</h1>
+        <h1>Verifikasi Surat Resmi</h1>
         <div style="text-align:center; color:#3b4d3a; font-size:1rem; margin-bottom:1.2rem; font-weight:500;">
-            Masukkan Cert ID untuk memverifikasi keikutsertaan seminar Edu-Financial STITNU Al Farabi Pangandaran.
+            Masukkan Nomor Surat untuk memverifikasi Surat Senat Mahasiswa STITNU Al Farabi Pangandaran.
         </div>
         <form id="verifyForm">
-            <input type="text" id="certNumber" placeholder="Masukkan Nomor Sertifikat" required autocomplete="off" maxlength="19" aria-label="Nomor Sertifikat" tabindex="1">
+            <input type="text" id="certNumber" placeholder="Masukkan Nomor Surat" required autocomplete="off" maxlength="19" aria-label="Nomor Sertifikat" tabindex="1">
             <button type="submit" tabindex="2">Verifikasi</button>
         </form>
         <div id="result" class="result" style="display:none;" aria-live="polite"></div>
     </div>
     <footer style="margin-top:3.5rem; color:#3f3f3f6c; font-size:0.85rem; text-align:center; font-weight:600; letter-spacing:0px; padding-bottom:1.2rem;">
-        &copy; Made with â¤ï¸ by Ziez Studio Â· 2025
+        &copy; Senat Mahasiswa STITNU AL Farabi Pangandaran· 2025
     </footer>
     <div id="popup" style="display:none;" tabindex="-1"></div>
     <script>
