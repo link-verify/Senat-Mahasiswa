@@ -246,7 +246,7 @@
             <tr><td>Tanggal</td><td>${surat.tanggal}</td></tr>
           </table>
           <br>
-          <a href="https://wa.me/085211379911?text=Nomor%20Surat%20${encodeURIComponent(surat.nomor)}%20telah%20terverifikasi." target="_blank">
+          <a href="https://wa.me/6285211379911?text=Nomor%20Surat%20${encodeURIComponent(surat.nomor)}%20telah%20terverifikasi." target="_blank">
             WhatsApp
           </a>
         `;
