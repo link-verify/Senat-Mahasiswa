@@ -199,9 +199,9 @@
   </main>
 
   <footer>
+    <p> All rights reserved. </p>
     &copy; 2025 Senat Mahasiswa
     <p> STITNU Al-Farabi Pangandaran. </p>
-      <p> All rights reserved. </p>
   </footer>
 
   <script>
