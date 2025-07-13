@@ -184,7 +184,7 @@
 
 <body>
   <header>
-    <img src="https://stit-alfarabi.info/images/logo/logo1.png" alt="Logo STITNU">
+    <img src="#" alt="Logo STITNU">
     <h1>Verifikasi TTE Surat</h1>
   </header>
 
@@ -200,7 +200,8 @@
   </main>
 
   <footer>
-    &copy; 2025 Senat Mahasiswa STITNU Al-Farabi Pangandaran. All rights reserved.
+    &copy; 2025 Senat Mahasiswa
+    <p> STITNU Al-Farabi Pangandaran. All rights reserved. </p>
   </footer>
 
   <script>
