@@ -1,4 +1,3 @@
-CTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -416,7 +415,7 @@ CTYPE html>
     <script>
         // Data peserta sertifikat lokal
         const certificates = [
-            { nomor: '001/MPI/22E-EF/2025', nama: 'Irpan Taupik Hidayat, M. Pd.', sebagai: 'Narasumber' }
+            { nomor: '001/SEM/06A-VI/2025', nama: 'Irpan Taupik Hidayat, M. Pd.', sebagai: 'Narasumber' }
             ];
         window.certificatesLoaded = true;
         // Info acara (sama untuk semua)
