@@ -230,7 +230,7 @@
       if (surat) {
         result.className = "success show";
         result.innerHTML = `
-          <p>✅ Nomor Surat TERDAFTAR</p>
+          <p>Nomor Surat TERDAFTAR</p>
           <table>
             <tr><td>Nomor</td><td>${surat.nomor}</td></tr>
             <tr><td>Ditandatangani</td><td>${surat.ditandatangani.join(", ")}</td></tr>
