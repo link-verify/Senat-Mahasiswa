@@ -1,112 +1,238 @@
-<?php
-session_start();
-
-// Data user statis
-$users = [
-  ["username" => "ketua", "password" => "1234", "role" => "Ketua"],
-  ["username" => "sekretaris", "password" => "1234", "role" => "Sekretaris"],
-  ["username" => "bendahara", "password" => "1234", "role" => "Bendahara"],
-];
-
-// Logout
-if (isset($_GET['logout'])) {
-  session_destroy();
-  header("Location: organisasi.php");
-  exit();
-}
-
-// Tangani login
-$error = '';
-if (isset($_POST['login'])) {
-  $username = $_POST['username'] ?? '';
-  $password = $_POST['password'] ?? '';
-
-  $found = false;
-  foreach ($users as $user) {
-    if ($user['username'] === $username && $user['password'] === $password) {
-      $_SESSION['user'] = $user;
-      $found = true;
-      break;
-    }
-  }
-
-  if (!$found) {
-    $error = "Username atau password salah!";
-  }
-}
-
-// Tangani logout link
-if (isset($_GET['logout'])) {
-  session_destroy();
-  header("Location: organisasi.php");
-  exit();
-}
-
-// Tampilkan halaman
-$user = $_SESSION['user'] ?? null;
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Organisasi - Sistem Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifikasi TTE Surat</title>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 0; }
-    .container { max-width: 400px; margin: 50px auto; background: #fff; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); padding: 30px; }
-    h2 { margin-top: 0; color: #0047AB; }
-    input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 10px; background: #0047AB; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-    button:hover { background: #0066CC; }
-    .error { color: red; font-size: 12px; }
-    .welcome { text-align: center; }
-    .logout { display: inline-block; margin-top: 15px; color: #0047AB; text-decoration: none; }
-    .card { background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    :root {
+      --primary: #21A9A0; /* Asumsi hijau toska dari logo */
+      --secondary: #17817A;
+      --light-bg: #f6f9f8;
+      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--light-bg);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header img {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 500px;
+      width: 100%;
+      transition: var(--transition);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 5px rgba(33, 169, 160, 0.3);
+    }
+
+    button {
+      padding: 12px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(33,169,160,0.3);
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background: var(--secondary);
+    }
+
+    #result {
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #result.success {
+      color: var(--primary);
+    }
+
+    #result.error {
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    td {
+      padding: 6px 0;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      color: #444;
+      width: 40%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    @media(max-width: 600px) {
+      .card {
+        padding: 30px 20px;
+      }
+    }
   </style>
 </head>
+
 <body>
+  <header>
+    <img src="https://drive.google.com/uc?export=view&id=1RtL277zYQBcQRQ7gCeV1UhQ5o91GIMVk" alt="Logo Organisasi">
+    <h1>Verifikasi TTE Surat</h1>
+  </header>
 
-<div class="container">
-  <?php if (!$user): ?>
-    <h2>Login Organisasi</h2>
-    <form method="POST">
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <?php if($error): ?>
-        <div class="error"><?= $error ?></div>
-      <?php endif; ?>
-      <button type="submit" name="login">Login</button>
-    </form>
-  <?php else: ?>
-    <div class="welcome">
-      <h2>Selamat Datang, <?= htmlspecialchars($user['username']); ?>!</h2>
-      <p>Peran Anda: <strong><?= $user['role']; ?></strong></p>
-      <a class="logout" href="?logout=1">Logout</a>
-    </div>
-
+  <main>
     <div class="card">
-      <?php if ($user['role'] == "Ketua"): ?>
-        <h3>Menu Ketua</h3>
-        <ul>
-          <li>Kelola agenda rapat</li>
-          <li>Verifikasi laporan keuangan</li>
-        </ul>
-      <?php elseif ($user['role'] == "Sekretaris"): ?>
-        <h3>Menu Sekretaris</h3>
-        <ul>
-          <li>Input notulen rapat</li>
-          <li>Update dokumen organisasi</li>
-        </ul>
-      <?php elseif ($user['role'] == "Bendahara"): ?>
-        <h3>Menu Bendahara</h3>
-        <ul>
-          <li>Input laporan keuangan</li>
-          <li>Lihat laporan kas</li>
-        </ul>
-      <?php endif; ?>
+      <h2>Cek Keaslian Surat</h2>
+      <form id="verifyForm">
+        <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required />
+        <button type="submit">Verifikasi</button>
+      </form>
+      <div id="result"></div>
     </div>
-  <?php endif; ?>
-</div>
+  </main>
 
+  <footer>
+    &copy; 2025 Organisasi Anda. All rights reserved.
+  </footer>
+
+  <script>
+    const suratData = [
+      {
+        nomor: "001/TTE/2025",
+        ditandatangani: ["Budi Santoso, S.Pd", "Rina Wijaya, M.M"],
+        perihal: "Undangan Rapat Koordinasi",
+        ditujukan: "Kepala Sekolah SMA Negeri 1 Pangandaran",
+        tanggal: "15 Januari 2025"
+      },
+      {
+        nomor: "002/TTE/2025",
+        ditandatangani: ["Agus Salim, M.Pd"],
+        perihal: "Pemberitahuan Libur Sekolah",
+        ditujukan: "Seluruh Orang Tua/Wali Murid",
+        tanggal: "20 Februari 2025"
+      }
+    ];
+
+    document.getElementById("verifyForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nomorInput = document.getElementById("nomorSurat").value.trim();
+      const result = document.getElementById("result");
+      const surat = suratData.find(item => item.nomor === nomorInput);
+
+      if (surat) {
+        result.className = "success show";
+        result.innerHTML = `
+          <p>✅ Nomor Surat TERDAFTAR</p>
+          <table>
+            <tr><td>Nomor</td><td>${surat.nomor}</td></tr>
+            <tr><td>Ditandatangani</td><td>${surat.ditandatangani.join(", ")}</td></tr>
+            <tr><td>Perihal</td><td>${surat.perihal}</td></tr>
+            <tr><td>Ditujukan</td><td>${surat.ditujukan}</td></tr>
+            <tr><td>Tanggal</td><td>${surat.tanggal}</td></tr>
+          </table>
+        `;
+        Swal.fire({
+          icon: 'success',
+          title: 'Verifikasi Berhasil',
+          text: `Nomor Surat "${surat.nomor}" valid.`,
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } else {
+        result.className = "error show";
+        result.innerHTML = "❌ Nomor Surat TIDAK TERDAFTAR.";
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Nomor Surat tidak terdaftar. Cek kembali!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
+    });
+  </script>
 </body>
 </html>
