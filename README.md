@@ -185,7 +185,7 @@
 
 <body>
   <header>
-    <img src="https://drive.google.com/uc?export=view&id=1RtL277zYQBcQRQ7gCeV1UhQ5o91GIMVk" alt="Logo STITNU">
+    <img src="https://stit-alfarabi.info/images/logo/logo1.png" alt="Logo STITNU">
     <h1>Verifikasi TTE Surat</h1>
   </header>
 
