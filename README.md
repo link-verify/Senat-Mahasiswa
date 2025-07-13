@@ -11,10 +11,11 @@
 
   <style>
     :root {
-      --primary: #21A9A0; /* Asumsi hijau toska dari logo */
-      --secondary: #17817A;
-      --light-bg: #f6f9f8;
-      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+      --primary: #4FC3F7; /* biru langit */
+      --secondary: #0288D1;
+      --gradient: linear-gradient(135deg, #4FC3F7 0%, #0288D1 100%);
+      --light-bg: #e7f4fb;
+      --shadow: 0 10px 40px rgba(0,0,0,0.1);
       --radius: 12px;
       --transition: all 0.3s ease;
     }
@@ -35,14 +36,16 @@
     }
 
     header img {
-      max-width: 100px;
-      margin-bottom: 10px;
+      max-width: 120px;
+      margin-bottom: 15px;
     }
 
     header h1 {
       margin: 0;
       font-weight: 700;
-      color: var(--primary);
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     main {
@@ -60,12 +63,15 @@
       box-shadow: var(--shadow);
       max-width: 500px;
       width: 100%;
+      text-align: center;
       transition: var(--transition);
     }
 
     .card h2 {
       margin-top: 0;
-      color: var(--primary);
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     form {
@@ -74,35 +80,36 @@
     }
 
     input {
-      padding: 12px 15px;
+      padding: 14px 16px;
       margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: var(--radius);
       font-size: 16px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
       transition: var(--transition);
     }
 
     input:focus {
       border-color: var(--primary);
       outline: none;
-      box-shadow: 0 0 5px rgba(33, 169, 160, 0.3);
+      box-shadow: 0 0 8px rgba(79,195,247,0.4);
     }
 
     button {
-      padding: 12px;
-      background: var(--primary);
+      padding: 14px;
+      background: var(--gradient);
       color: #fff;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
       font-weight: 600;
       font-size: 16px;
-      box-shadow: 0 4px 12px rgba(33,169,160,0.3);
+      box-shadow: 0 4px 20px rgba(79,195,247,0.4);
       transition: var(--transition);
     }
 
     button:hover {
-      background: var(--secondary);
+      transform: translateY(-2px);
     }
 
     #result {
@@ -118,7 +125,7 @@
     }
 
     #result.success {
-      color: var(--primary);
+      color: var(--secondary);
     }
 
     #result.error {
@@ -146,7 +153,7 @@
       text-align: center;
       padding: 20px;
       font-size: 14px;
-      color: #aaa;
+      color: #777;
     }
 
     @media(max-width: 600px) {
@@ -216,8 +223,8 @@
         `;
         Swal.fire({
           icon: 'success',
-          title: 'Verifikasi Berhasil',
-          text: `Nomor Surat "${surat.nomor}" valid.`,
+          title: 'Valid',
+          text: `Nomor Surat "${surat.nomor}" terverifikasi.`,
           showConfirmButton: false,
           timer: 2000
         });
@@ -227,7 +234,7 @@
         Swal.fire({
           icon: 'error',
           title: 'Gagal',
-          text: 'Nomor Surat tidak terdaftar. Cek kembali!',
+          text: 'Nomor Surat tidak terdaftar.',
           showConfirmButton: false,
           timer: 2000
         });
