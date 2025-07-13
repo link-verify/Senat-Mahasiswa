@@ -184,7 +184,6 @@
 
 <body>
   <header>
-    <img src="#" alt="Logo STITNU">
     <h1>Verifikasi TTE Surat</h1>
   </header>
 
