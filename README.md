@@ -220,6 +220,13 @@
         ditujukan: "Seluruh Orang Tua/Wali Murid",
         tanggal: "20 Februari 2025"
       }
+      {
+        nomor: "000/TTE/2025",
+        ditandatangani: ["Syadad Nabil Mudzafar"],
+        perihal: "Pemberitahuan Libur Sekolah",
+        ditujukan: "Seluruh Orang Tua/Wali Murid",
+        tanggal: "20 Februari 2025"
+      }
     ];
 
     document.getElementById("verifyForm").addEventListener("submit", function(e) {
