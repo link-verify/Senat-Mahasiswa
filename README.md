@@ -1,3 +1,4 @@
+CTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -393,6 +394,7 @@
     <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 </head>
 <body>
+    <button class="dark-toggle" id="darkToggle" title="Toggle Dark Mode">ð</button>
     <div class="container">
         <div class="instansi-logo">
             <img src="https://si-aa.alfarabi.ac.id/stitnu_dell.png" alt="Logo Instansi" />
@@ -415,6 +417,40 @@
         // Data peserta sertifikat lokal
         const certificates = [
             { nomor: '001/MPI/22E-EF/2025', nama: 'Irpan Taupik Hidayat, M. Pd.', sebagai: 'Narasumber' },
+            { nomor: '002/MPI/22E-EF/2025', nama: 'Dr. Yanti Nurdiyanti, S.Pd.I., M.M.', sebagai: 'Keynote Speaker' },
+          { nomor: '003/MPI/22E-EF/2025', nama: 'Anisa Nurahmayanti', sebagai: 'Presenter' },
+          { nomor: '004/MPI/22E-EF/2025', nama: 'Barizah Amalia', sebagai: 'Presenter' },
+          { nomor: '005/MPI/22E-EF/2025', nama: 'Diah Nurlatifah', sebagai: 'Presenter' },
+          { nomor: '006/MPI/22E-EF/2025', nama: 'Hade Yustika Prayoga', sebagai: 'Presenter' },
+          { nomor: '007/MPI/22E-EF/2025', nama: 'Ika Rostika', sebagai: 'Presenter' },
+          { nomor: '010/MPI/22E-EF/2025', nama: 'Khidayat Muslim', sebagai: 'Presenter' },
+          { nomor: '011/MPI/22E-EF/2025', nama: 'Laelatul Mutmainah', sebagai: 'Presenter' },
+          { nomor: '013/MPI/22E-EF/2025', nama: 'Mutiara Anjani', sebagai: 'Presenter' },
+          { nomor: '014/MPI/22E-EF/2025', nama: 'Nur Aziz', sebagai: 'Presenter' },
+          { nomor: '017/MPI/22E-EF/2025', nama: 'Wulandari', sebagai: 'Presenter' },
+          { nomor: '018/MPI/22E-EF/2025', nama: 'Siti Nurlaela', sebagai: 'Peserta' },
+          { nomor: '019/MPI/22E-EF/2025', nama: 'Ena Muawanah', sebagai: 'Peserta' },
+          { nomor: '020/MPI/22E-EF/2025', nama: 'Dani Ramdani', sebagai: 'Peserta' },
+          { nomor: '021/MPI/22E-EF/2025', nama: 'Ari', sebagai: 'Peserta' },
+          { nomor: '022/MPI/22E-EF/2025', nama: 'Tian Kadarisman', sebagai: 'Peserta' },
+          { nomor: '023/MPI/22E-EF/2025', nama: 'Galang Pratama Sudiar', sebagai: 'Peserta' },
+          { nomor: '024/MPI/22E-EF/2025', nama: 'Ismy Tanzilurrahmahmah', sebagai: 'Peserta' },
+          { nomor: '025/MPI/22E-EF/2025', nama: 'Fitri Wulansari', sebagai: 'Peserta' },
+          { nomor: '026/MPI/22E-EF/2025', nama: 'Fuadah Nahdiyah', sebagai: 'Peserta' },
+          { nomor: '027/MPI/22E-EF/2025', nama: 'Indah Nurfadillah', sebagai: 'Peserta' },
+          { nomor: '028/MPI/22E-EF/2025', nama: 'Henti Suhesti', sebagai: 'Peserta' },
+          { nomor: '029/MPI/22E-EF/2025', nama: 'Ismah Wardah', sebagai: 'Peserta' },
+          { nomor: '030/MPI/22E-EF/2025', nama: 'Yusianah', sebagai: 'Peserta' },
+          { nomor: '031/MPI/22E-EF/2025', nama: 'Anisa', sebagai: 'Peserta' },
+          { nomor: '032/MPI/22E-EF/2025', nama: 'Nurhayati', sebagai: 'Peserta' },
+          { nomor: '033/MPI/22E-EF/2025', nama: 'Agni Algifari', sebagai: 'Peserta' },
+          { nomor: '034/MPI/22E-EF/2025', nama: 'Salsabila A.J.', sebagai: 'Peserta' },
+          { nomor: '035/MPI/22E-EF/2025', nama: 'Ai Naufalia Satriani Putri', sebagai: 'Peserta' },
+          { nomor: '036/MPI/22E-EF/2025', nama: 'Wafa Syahla Fadiyah', sebagai: 'Peserta' },
+          { nomor: '037/MPI/22E-EF/2025', nama: 'Rachma Tsamroatullaila', sebagai: 'Peserta' },
+          { nomor: '038/MPI/22E-EF/2025', nama: 'Naisa Febrianti', sebagai: 'Peserta' },
+          { nomor: '039/MPI/22E-EF/2025', nama: 'Yulianti', sebagai: 'Peserta' },
+          { nomor: '040/MPI/22E-EF/2025', nama: 'Riani Qurrotu Aini', sebagai: 'Peserta' }
         ];
         window.certificatesLoaded = true;
         // Info acara (sama untuk semua)
@@ -434,11 +470,11 @@
             let hasButton = !autoClose;
             let warningIcon = `<div class='popup-icon'><svg fill='currentColor' viewBox='0 0 20 20'><path d='M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l6.516 11.591c.75 1.334-.213 2.985-1.742 2.985H3.483c-1.53 0-2.492-1.651-1.742-2.985L8.257 3.1zM11 13a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm-1-2a1 1 0 0 0 1-1V8a1 1 0 1 0-2 0v2a1 1 0 0 0 1 1z'/></svg></div>`;
             if (autoClose && type === 'warning') {
-                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content warning no-btn\"></div></div>`;
+                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content warning no-btn\">${warningIcon}${message}</div></div>`;
             } else if (autoClose) {
-                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content no-btn\"></div></div>`;
+                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content no-btn\">${message}</div></div>`;
             } else {
-                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content\"><br><button id='popupCloseBtn' tabindex="0" onclick=\"closePopup()\">Tutup</button></div></div>`;
+                popup.innerHTML = `<div class=\"popup\"><div class=\"popup-content\">${message}<br><button id='popupCloseBtn' tabindex="0" onclick=\\"closePopup()\\">Tutup</button></div></div>`;
             }
             popup.style.display = 'flex';
             popup.focus();
@@ -537,24 +573,24 @@
                     resultDiv.innerHTML = `
                         <div class="cert-modern" tabindex="0" aria-label="Hasil Verifikasi Sertifikat">
                             <div class="cert-header">
-                                <div class="cert-status" style="background:;display:flex;align-items:center;gap:0.5em;">
+                                <div class="cert-status" style="background:${statusColor};display:flex;align-items:center;gap:0.5em;">
                                     <span>Valid</span>
                                     <span class="success-check" aria-hidden="true">
                                         <svg id="successCheckIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:1.5em;height:1.5em;color:#22c55e;opacity:0;transform:scale(0.7);transition:all .5s cubic-bezier(.39,.575,.56,1);"><circle cx="12" cy="12" r="11" stroke="#22c55e" stroke-width="2" fill="none"/><path d="M7 13l3 3 7-7" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
                                     </span>
                                 </div>
                                 <div class="cert-nomor" style="display:flex;align-items:center;gap:0.5em;font-size:0.93rem;word-break:break-all;">
-                                    <span id="certNumText"></span>
+                                    <span id="certNumText">${cert.nomor}</span>
                                 </div>
                             </div>
                             <div class="cert-body">
-                                <div class="cert-nama"></div>
-                                <div class="cert-sebagai">Sebagai <span></span></div>
+                                <div class="cert-nama">${cert.nama}</div>
+                                <div class="cert-sebagai">Sebagai <span>${cert.sebagai}</span></div>
                                 <div class="event-card">
-                                    <div class="event-title"></div>
-                                    <div class="event-detail"><svg fill='currentColor' viewBox='0 0 24 24'><path d='M6.75 2A.75.75 0 0 1 7.5 2.75V4h9V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20h-12.5A2.75 2.75 0 0 1 3 17.25V6.75A2.75 2.75 0 0 1 5.75 4H6V2.75A.75.75 0 0 1 6.75 2zm-1 3A1.25 1.25 0 0 0 4.5 6.25v10.5c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25V6.25A1.25 1.25 0 0 0 18.25 5h-.25v1.25a.75.75 0 0 1-1.5 0V5h-9v1.25a.75.75 0 0 1-1.5 0V5h-.25z'/></svg> </div>
-                                    <div class="event-detail"><svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2C7.03 2 2.73 6.11 2.05 11.01c-.08.6.4 1.14 1.01 1.14h1.02c.55 0 1-.45 1-1 0-3.87 3.13-7 7-7s7 3.13 7 7c0 .55.45 1 1 1h1.02c.61 0 1.09-.54 1.01-1.14C21.27 6.11 16.97 2 12 2zm0 18c-2.67 0-8 1.34-8 4v1h16v-1c0-2.66-5.33-4-8-4z'/></svg> </div>
-                                    <div class="event-desc"></div>
+                                    <div class="event-title">${eventInfo.nama}</div>
+                                    <div class="event-detail"><svg fill='currentColor' viewBox='0 0 24 24'><path d='M6.75 2A.75.75 0 0 1 7.5 2.75V4h9V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20h-12.5A2.75 2.75 0 0 1 3 17.25V6.75A2.75 2.75 0 0 1 5.75 4H6V2.75A.75.75 0 0 1 6.75 2zm-1 3A1.25 1.25 0 0 0 4.5 6.25v10.5c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25V6.25A1.25 1.25 0 0 0 18.25 5h-.25v1.25a.75.75 0 0 1-1.5 0V5h-9v1.25a.75.75 0 0 1-1.5 0V5h-.25z'/></svg> ${eventInfo.tanggal}</div>
+                                    <div class="event-detail"><svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2C7.03 2 2.73 6.11 2.05 11.01c-.08.6.4 1.14 1.01 1.14h1.02c.55 0 1-.45 1-1 0-3.87 3.13-7 7-7s7 3.13 7 7c0 .55.45 1 1 1h1.02c.61 0 1.09-.54 1.01-1.14C21.27 6.11 16.97 2 12 2zm0 18c-2.67 0-8 1.34-8 4v1h16v-1c0-2.66-5.33-4-8-4z'/></svg> ${eventInfo.lokasi}</div>
+                                    <div class="event-desc">${eventInfo.deskripsi}</div>
                                 </div>
                                 <div style="margin-top:0.7em;font-size:0.87em;color:#64748b;text-align:right;line-height:1.5;">
                                     <span id="metaTanggal"></span> | <span id="metaWaktu"></span> | <span id="metaIP"></span>
@@ -586,16 +622,16 @@
 `*Verifikasi Sertifikat Seminar Edu-Financial STITNU Al Farabi Pangandaran*
 
 â *Status:* Valid
-*Nama:* 
-*Nomor Sertifikat:* 
-*Sebagai:* 
-*Acara:* 
-*Tanggal Acara:* 
-*Lokasi:* 
+*Nama:* ${cert.nama}
+*Nomor Sertifikat:* ${cert.nomor}
+*Sebagai:* ${cert.sebagai}
+*Acara:* ${eventInfo.nama}
+*Tanggal Acara:* ${eventInfo.tanggal}
+*Lokasi:* ${eventInfo.lokasi}
 
-_Diverifikasi pada  pukul _
+_Diverifikasi pada ${tgl} pukul ${jam}_
 https://azizpangandaran.github.io/verifikasi-sertifikat/`;
-                                const waUrl = `https://api.whatsapp.com/send?text=`;
+                                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
                                 window.open(waUrl, '_blank');
                             });
                             waBtn.addEventListener('keydown', function(e) {
@@ -612,11 +648,11 @@ https://azizpangandaran.github.io/verifikasi-sertifikat/`;
                         const metaTanggal = document.getElementById('metaTanggal');
                         const metaWaktu = document.getElementById('metaWaktu');
                         const metaIP = document.getElementById('metaIP');
-                        if(metaTanggal) metaTanggal.textContent = `Tanggal: `;
-                        if(metaWaktu) metaWaktu.textContent = `Waktu: `;
+                        if(metaTanggal) metaTanggal.textContent = `Tanggal: ${tgl}`;
+                        if(metaWaktu) metaWaktu.textContent = `Waktu: ${jam}`;
                         if(metaIP) {
                             fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{
-                                metaIP.textContent = `IP: `;
+                                metaIP.textContent = `IP: ${d.ip}`;
                             }).catch(()=>{
                                 metaIP.textContent = 'IP: -';
                             });
