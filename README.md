@@ -213,7 +213,7 @@
         tanggal: "15 Januari 2025"
       },
       {
-        nomor: "002/TTE/2025",
+        nomor: "MELEDAKS",
         ditandatangani: ["Agus Salim, M.Pd"],
         perihal: "Pemberitahuan Libur Sekolah",
         ditujukan: "Seluruh Orang Tua/Wali Murid",
