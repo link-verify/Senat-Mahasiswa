@@ -206,10 +206,10 @@
   <script>
     const suratData = [
       {
-        nomor: "001/TTE/2025",
-        ditandatangani: ["Budi Santoso, S.Pd", "Rina Wijaya, M.M"],
+        nomor: "000/SM-STITNU/VI-A/VII/2025",
+        ditandatangani: ["Syadad Nabil Mudzafar"],
         perihal: "Undangan Rapat Koordinasi",
-        ditujukan: "Kepala Sekolah SMA Negeri 1 Pangandaran",
+        ditujukan: "Seluruh Anggota Senat Mahasiswa",
         tanggal: "15 Januari 2025"
       },
       {
