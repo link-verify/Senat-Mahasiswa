@@ -184,7 +184,7 @@
 
 <body>
   <header>
-    <h1>Verifikasi TTE Surat</h1>
+    
   </header>
 
   <main>
