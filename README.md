@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -132,7 +131,7 @@
 
   <script>
     const dataSurat = {
-      "001/SM/2025": {
+      "001.010/SM-STITNU/VII/25": {
         judul: "Undangan Rapat Koordinasi",
         tanggal: "20 Juli 2025",
         pengirim: "Senat Mahasiswa STITNU Al-Farabi"
