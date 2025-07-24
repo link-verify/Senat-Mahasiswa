@@ -1,87 +1,90 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Verifikasi Surat TTE</title>
   <style>
+    :root {
+      --primary: #0d6efd;
+      --success: #28a745;
+      --danger: #dc3545;
+      --bg-dark: #121212;
+      --text-light: #f1f1f1;
+      --shadow: rgba(0, 0, 0, 0.6);
+    }
+
     * {
       box-sizing: border-box;
+      transition: all 0.3s ease;
     }
 
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .container {
       background-color: #1e1e1e;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-      width: 100%;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px var(--shadow);
+      width: 90%;
       max-width: 500px;
-      animation: slideUp 1s ease-in-out;
     }
 
     h2 {
+      color: var(--primary);
       text-align: center;
-      margin-bottom: 25px;
-      color: #00bfff;
     }
 
     input[type="text"] {
       width: 100%;
       padding: 12px;
       border: none;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
       font-size: 16px;
-      background: #2c2c2c;
-      color: #fff;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    input[type="text"]:focus {
-      background: #3a3a3a;
-      border: 1px solid #00bfff;
+      background-color: #2a2a2a;
+      color: var(--text-light);
     }
 
     button {
+      margin-top: 15px;
       width: 100%;
       padding: 12px;
-      background-color: #00bfff;
-      border: none;
-      border-radius: 10px;
-      color: white;
       font-size: 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      transition: 0.3s;
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
     }
 
     button:hover {
-      background-color: #009acf;
-    }
-
-    .result {
-      margin-top: 20px;
-      animation: fadeIn 0.5s ease-in-out;
+      background: #0b5ed7;
     }
 
     table {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 20px;
       border-collapse: collapse;
       background-color: #2c2c2c;
-      color: #fff;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
     }
 
@@ -89,42 +92,45 @@
       padding: 12px;
       border-bottom: 1px solid #444;
       text-align: left;
+      color: var(--text-light);
     }
 
     th {
-      background-color: #00bfff;
-      color: #000;
+      background-color: #333;
+      color: #fff;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0 }
-      to { opacity: 1 }
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .success {
+      color: var(--success);
+    }
+
+    .error {
+      color: var(--danger);
     }
 
     @media (max-width: 600px) {
       .container {
-        padding: 25px;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Verifikasi Surat TTE</h2>
+    <h2>🔍 Verifikasi Tanda Tangan Elektronik</h2>
     <form id="formVerifikasi">
-      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat..." required>
+      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat Contoh: 001/SM/2025" required>
       <button type="submit">Verifikasi</button>
     </form>
     <div id="hasilVerifikasi" class="result"></div>
   </div>
 
   <script>
-    // Simulasi data surat
     const dataSurat = {
       "001/SM/2025": {
         judul: "Undangan Rapat Koordinasi",
@@ -137,37 +143,35 @@
         pengirim: "Ketua Senat Mahasiswa STITNU"
       },
       "003/SM/2025": {
-        judul: "Pengumuman Pelantikan",
-        tanggal: "1 Agustus 2025",
-        pengirim: "Sekretariat Senat Mahasiswa"
+        judul: "Notulen Rapat Akhir Semester",
+        tanggal: "10 Juli 2025",
+        pengirim: "Sekretaris Senat Mahasiswa"
       }
     };
 
-    document.getElementById('formVerifikasi').addEventListener('submit', function (e) {
+    document.getElementById('formVerifikasi').addEventListener('submit', function(e) {
       e.preventDefault();
       const nomor = document.getElementById('nomorSurat').value.trim();
       const hasil = document.getElementById('hasilVerifikasi');
-      hasil.innerHTML = '';
 
-      if (nomor === '') {
-        hasil.innerHTML = `<span style="color:tomato;">❌ Nomor surat wajib diisi.</span>`;
+      if (nomor === "") {
+        hasil.innerHTML = `<div class="error">❌ Nomor surat tidak boleh kosong.</div>`;
         return;
       }
 
-      const surat = dataSurat[nomor];
-      if (surat) {
+      if (dataSurat[nomor]) {
+        const surat = dataSurat[nomor];
         hasil.innerHTML = `
-          <div style="color:lightgreen; font-weight:600;">✅ Surat TERVERIFIKASI</div>
+          <div class="success">✅ Surat TERVERIFIKASI</div>
           <table>
-            <tr><th>Field</th><th>Informasi</th></tr>
-            <tr><td>Nomor Surat</td><td>${nomor}</td></tr>
-            <tr><td>Judul</td><td>${surat.judul}</td></tr>
-            <tr><td>Tanggal</td><td>${surat.tanggal}</td></tr>
-            <tr><td>Pengirim</td><td>${surat.pengirim}</td></tr>
+            <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
+            <tr><th>Judul</th><td>${surat.judul}</td></tr>
+            <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
+            <tr><th>Pengirim</th><td>${surat.pengirim}</td></tr>
           </table>
         `;
       } else {
-        hasil.innerHTML = `<span style="color:tomato;">❌ Nomor surat tidak ditemukan dalam database.</span>`;
+        hasil.innerHTML = `<div class="error">❌ Nomor surat <strong>${nomor}</strong> tidak ditemukan dalam sistem.</div>`;
       }
     });
   </script>
