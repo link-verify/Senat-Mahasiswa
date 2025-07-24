@@ -1,139 +1,173 @@
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verifikasi Surat TTE</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #e9f1fb;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .container {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      width: 100%;
       max-width: 500px;
-      margin: 80px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
+      animation: slideUp 1s ease-in-out;
     }
 
     h2 {
-      color: #007bff;
+      text-align: center;
+      margin-bottom: 25px;
+      color: #00bfff;
     }
 
     input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
       font-size: 16px;
-      border: 2px solid #007bff;
-      border-radius: 5px;
+      background: #2c2c2c;
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+      background: #3a3a3a;
+      border: 1px solid #00bfff;
     }
 
     button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
+      width: 100%;
+      padding: 12px;
+      background-color: #00bfff;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
-      background: #0056b3;
+      background-color: #009acf;
     }
 
-    #hasilVerifikasi {
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 18px;
+    .result {
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+      background-color: #2c2c2c;
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+
+    th {
+      background-color: #00bfff;
+      color: #000;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     @media (max-width: 600px) {
       .container {
-        margin: 40px 15px;
         padding: 25px;
-      }
-
-      input[type="text"] {
-        width: 100%;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Verifikasi Tanda Tangan Elektronik</h2>
+    <h2>Verifikasi Surat TTE</h2>
     <form id="formVerifikasi">
-      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
-      <br>
+      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat..." required>
       <button type="submit">Verifikasi</button>
     </form>
-    <div id="hasilVerifikasi"></div>
+    <div id="hasilVerifikasi" class="result"></div>
   </div>
 
   <script>
-    // === CONTOH DATA SURAT YANG TELAH TERVERIFIKASI ===
+    // Simulasi data surat
     const dataSurat = {
       "001/SM/2025": {
-        judul: "Undangan Rapat Koordinasi Divisi",
+        judul: "Undangan Rapat Koordinasi",
         tanggal: "20 Juli 2025",
-        pengirim: "Senat Mahasiswa STITNU Al-Farabi Pangandaran",
-        status: "Aktif"
+        pengirim: "Senat Mahasiswa STITNU Al-Farabi"
       },
       "002/SM/2025": {
-        judul: "Surat Tugas Pelatihan Dasar Kepemimpinan",
+        judul: "Surat Tugas Kegiatan Sosial",
         tanggal: "15 Juli 2025",
-        pengirim: "Ketua Senat Mahasiswa STITNU Al-Farabi",
-        status: "Aktif"
+        pengirim: "Ketua Senat Mahasiswa STITNU"
       },
       "003/SM/2025": {
-        judul: "Pemberitahuan Kegiatan Bakti Sosial",
-        tanggal: "10 Juli 2025",
-        pengirim: "Sekretaris Senat Mahasiswa STITNU",
-        status: "Aktif"
-      },
-      "004/SM/2024": {
-        judul: "Surat Edaran Libur Semester Ganjil",
-        tanggal: "15 Desember 2024",
-        pengirim: "Wakil Ketua Senat Mahasiswa",
-        status: "Kadaluarsa"
+        judul: "Pengumuman Pelantikan",
+        tanggal: "1 Agustus 2025",
+        pengirim: "Sekretariat Senat Mahasiswa"
       }
     };
 
-    // === LOGIKA VERIFIKASI ===
-    document.getElementById('formVerifikasi').addEventListener('submit', function(e) {
+    document.getElementById('formVerifikasi').addEventListener('submit', function (e) {
       e.preventDefault();
       const nomor = document.getElementById('nomorSurat').value.trim();
       const hasil = document.getElementById('hasilVerifikasi');
+      hasil.innerHTML = '';
 
       if (nomor === '') {
-        hasil.innerHTML = `<span style="color:red;">Nomor surat tidak boleh kosong.</span>`;
+        hasil.innerHTML = `<span style="color:tomato;">❌ Nomor surat wajib diisi.</span>`;
         return;
       }
 
-      if (dataSurat[nomor]) {
-        const surat = dataSurat[nomor];
-        const warna = surat.status === "Aktif" ? "green" : "orange";
-        const icon = surat.status === "Aktif" ? "✅" : "⚠️";
-
+      const surat = dataSurat[nomor];
+      if (surat) {
         hasil.innerHTML = `
-          <div style="color:${warna};">
-            ${icon} Surat <strong>${surat.status === "Aktif" ? "TERVERIFIKASI" : "TERVERIFIKASI TAPI KADALUARSA"}</strong><br><br>
-            <strong>Nomor Surat:</strong> ${nomor}<br>
-            <strong>Judul:</strong> ${surat.judul}<br>
-            <strong>Tanggal:</strong> ${surat.tanggal}<br>
-            <strong>Pengirim:</strong> ${surat.pengirim}
-          </div>
+          <div style="color:lightgreen; font-weight:600;">✅ Surat TERVERIFIKASI</div>
+          <table>
+            <tr><th>Field</th><th>Informasi</th></tr>
+            <tr><td>Nomor Surat</td><td>${nomor}</td></tr>
+            <tr><td>Judul</td><td>${surat.judul}</td></tr>
+            <tr><td>Tanggal</td><td>${surat.tanggal}</td></tr>
+            <tr><td>Pengirim</td><td>${surat.pengirim}</td></tr>
+          </table>
         `;
       } else {
-        hasil.innerHTML = `<span style="color:red;">❌ Nomor surat <strong>${nomor}</strong> tidak ditemukan dalam basis data kami.</span>`;
+        hasil.innerHTML = `<span style="color:tomato;">❌ Nomor surat tidak ditemukan dalam database.</span>`;
       }
     });
   </script>
