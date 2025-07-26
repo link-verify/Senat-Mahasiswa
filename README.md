@@ -214,7 +214,7 @@
         const surat = dataSurat[nomor];
         hasil.innerHTML = `
           <div style="color: green;">
-            <p>✅ Surat <strong>TERVERIFIKASI</strong></p>
+            <p>Surat<strong>Terverifikasi</strong></p>
             <table>
               <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
               <tr><th>Perihal</th><td>${surat.judul}</td></tr>
@@ -223,7 +223,7 @@
             </table>
           </div>
         `;
-        showPopup('✅ Surat berhasil diverifikasi.');
+        showPopup('Surat Terverivikasi.');
       } else {
         hasil.innerHTML = `<p style="color: red;">❌ Nomor surat <strong>tidak ditemukan</strong>.</p>`;
         showPopup('❌ Nomor surat tidak ditemukan.', false);
