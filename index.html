@@ -1,189 +1,183 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verifikasi Surat</title>
   <style>
     * {
       box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #e6f0ff, #ffffff);
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f4ff, #d9e4ff);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
 
     .container {
-      background: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      background: white;
+      margin: 30px 20px;
       padding: 20px;
-      width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       max-width: 500px;
-      transition: all 0.4s ease-in-out;
+      width: 100%;
+      position: relative;
     }
 
     h2 {
       text-align: center;
-      color: #003366;
+      margin-bottom: 20px;
     }
 
-    input[type="text"] {
+    input, button {
       width: 100%;
-      padding: 10px;
-      margin: 12px 0;
+      padding: 12px;
+      margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 16px;
     }
 
-    .verify-btn {
-      background: linear-gradient(to right, #007bff, #0056b3);
-      color: #fff;
+    button {
+      background: linear-gradient(to right, #4e9af1, #6db6ff);
+      color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      transition: transform 0.2s ease-in-out;
+      transition: background 0.3s ease;
     }
 
-    .verify-btn:hover {
-      transform: scale(1.03);
+    button:hover {
+      background: linear-gradient(to right, #3c88e3, #59aaff);
     }
 
-    .result {
+    .popup {
       display: none;
+      padding: 20px;
+      border-radius: 12px;
       margin-top: 20px;
-      background: #f0f8ff;
-      border-left: 4px solid #007bff;
-      padding: 15px;
-      border-radius: 8px;
-      position: relative;
-      animation: slideIn 0.5s ease forwards;
+      background: #f9f9f9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.5s ease;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .popup table {
+      width: 100%;
+      border-collapse: collapse;
     }
 
-    .info-item {
-      margin-bottom: 10px;
-    }
-
-    .info-label {
-      font-weight: bold;
-      color: #003366;
-    }
-
-    .info-value {
+    .popup td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
       color: #333;
     }
 
-    .lihat-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 14px;
-      background: #28a745;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
+    .whatsapp {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
     }
 
-    .whatsapp-btn {
-      margin-top: 20px;
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 10px;
-      background: linear-gradient(to right, #25D366, #128C7E);
+    .whatsapp a {
+      display: inline-block;
+      background: #25D366;
       color: white;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
       text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+    }
+
+    .whatsapp a:hover {
+      background: #20bd5a;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 20px;
+      background: linear-gradient(to right, #6a85b6, #bac8e0);
+      text-align: center;
+      color: #333;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
     @media (max-width: 600px) {
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      .verify-btn, .whatsapp-btn {
-        font-size: 1rem;
-      }
-
       .container {
-        padding: 15px;
+        margin: 20px 10px;
+      }
+
+      input, button {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2>Verifikasi Surat</h2>
     <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat">
-    <button class="verify-btn" onclick="verifikasiSurat()">Verifikasi</button>
+    <button onclick="verifikasiSurat()">Verifikasi</button>
 
-    <div id="hasilVerifikasi" class="result">
-      <div class="info-item"><span class="info-label">Nomor Surat:</span> <span class="info-value" id="nomorSuratHasil"></span></div>
-      <div class="info-item"><span class="info-label">Perihal:</span> <span class="info-value" id="perihalSurat"></span></div>
-      <div class="info-item"><span class="info-label">Tanggal:</span> <span class="info-value" id="tanggalSurat"></span></div>
-      <div class="info-item"><span class="info-label">Ditandatangani Oleh:</span> <span class="info-value" id="ttdSurat"></span></div>
-      <div class="info-item"><span class="info-label">Status:</span> <span class="info-value" id="statusSurat"></span></div>
-      <a id="lihatSurat" class="lihat-btn" href="#" target="_blank">Lihat Surat</a>
+    <div id="popup" class="popup"></div>
+    <div class="whatsapp" id="waBtn">
+      <a href="https://wa.me/6281234567890?text=Halo%20saya%20butuh%20info%20lebih%20tentang%20surat" target="_blank">Info Lebih</a>
     </div>
+  </div>
 
-    <a class="whatsapp-btn" href="https://wa.me/6281234567890" target="_blank">Hubungi Info Lebih Lanjut</a>
+  <div class="footer">
+    &copy; 2025 Sistem Verifikasi Surat — STITNU Al-Farabi Pangandaran
   </div>
 
   <script>
-    const dataSurat = {
-      "123/SMT/25A-BK/2024": {
-        perihal: "Undangan Rapat Senat",
-        tanggal: "2024-07-15",
-        ttd: "Syadad Nabil Mudzafar",
-        status: "Terverifikasi",
-        file: "https://example.com/surat-undangan.jpg"
-      },
-      "456/SMT/25A-BK/2024": {
-        perihal: "Pengumuman Pelantikan",
-        tanggal: "2024-08-01",
-        ttd: "Hoerudin",
-        status: "Terverifikasi",
-        file: "https://example.com/surat-pelantikan.jpg"
-      }
-    };
-
     function verifikasiSurat() {
-      const input = document.getElementById("nomorSurat").value.trim();
-      const hasil = document.getElementById("hasilVerifikasi");
+      const input = document.getElementById('nomorSurat').value.trim();
+      const popup = document.getElementById('popup');
+      const waBtn = document.getElementById('waBtn');
+
+      // Contoh data
+      const dataSurat = {
+        "123/ABC/24A-BD/2025": {
+          perihal: "Undangan Musyawarah",
+          tanggal: "24 Juli 2025",
+          penandatangan: "Ketua Senat Mahasiswa",
+          status: "Terverifikasi",
+          gambar: "https://via.placeholder.com/600x400.png?text=Contoh+Surat"
+        }
+      };
 
       if (dataSurat[input]) {
-        document.getElementById("nomorSuratHasil").textContent = input;
-        document.getElementById("perihalSurat").textContent = dataSurat[input].perihal;
-        document.getElementById("tanggalSurat").textContent = dataSurat[input].tanggal;
-        document.getElementById("ttdSurat").textContent = dataSurat[input].ttd;
-        document.getElementById("statusSurat").textContent = dataSurat[input].status;
-        document.getElementById("lihatSurat").href = dataSurat[input].file;
-        hasil.style.display = "block";
+        const surat = dataSurat[input];
+        popup.style.display = "block";
+        popup.innerHTML = `
+          <table>
+            <tr><td><strong>Nomor Surat</strong></td><td>${input}</td></tr>
+            <tr><td><strong>Perihal</strong></td><td>${surat.perihal}</td></tr>
+            <tr><td><strong>Tanggal</strong></td><td>${surat.tanggal}</td></tr>
+            <tr><td><strong>Ditandatangani oleh</strong></td><td>${surat.penandatangan}</td></tr>
+            <tr><td><strong>Status</strong></td><td style="color:green;"><strong>${surat.status}</strong></td></tr>
+            <tr><td colspan="2" style="text-align:center;"><a href="${surat.gambar}" target="_blank" style="text-decoration:none;color:#4e9af1;font-weight:bold;">🔍 Lihat Surat</a></td></tr>
+          </table>
+        `;
+        waBtn.style.display = "block";
       } else {
-        hasil.innerHTML = "<strong style='color: red;'>Nomor surat tidak ditemukan.</strong>";
-        hasil.style.display = "block";
+        popup.style.display = "block";
+        popup.innerHTML = `<p style="color:red; text-align:center;"><strong>Nomor surat tidak ditemukan.</strong></p>`;
+        waBtn.style.display = "none";
       }
     }
   </script>
-
 </body>
 </html>
