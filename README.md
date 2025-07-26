@@ -5,115 +5,129 @@
   <title>Verifikasi Surat TTE</title>
   <style>
     :root {
-      --primary: #0d6efd;
-      --success: #28a745;
-      --danger: #dc3545;
-      --bg-dark: #121212;
-      --text-light: #f1f1f1;
-      --shadow: rgba(0, 0, 0, 0.6);
-    }
-
-    * {
-      box-sizing: border-box;
-      transition: all 0.3s ease;
+      color-scheme: light dark;
     }
 
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      animation: fadeIn 1s ease-in-out;
+      background-color: var(--bg-color, #ffffff);
+      color: var(--text-color, #000000);
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (prefers-color-scheme: dark) {
+      body {
+        --bg-color: #121212;
+        --text-color: #ffffff;
+      }
+
+      table, th, td {
+        border-color: #ffffff;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+      }
+
+      table, th, td {
+        border-color: #000000;
+      }
     }
 
     .container {
-      background-color: #1e1e1e;
+      max-width: 600px;
+      margin: 80px auto;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px var(--shadow);
-      width: 90%;
-      max-width: 500px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease;
     }
 
     h2 {
-      color: var(--primary);
       text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     input[type="text"] {
-      width: 100%;
       padding: 12px;
-      border: none;
-      border-radius: 6px;
-      margin-top: 15px;
       font-size: 16px;
-      background-color: #2a2a2a;
-      color: var(--text-light);
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    input[type="text"]::placeholder {
+      color: #888;
     }
 
     button {
-      margin-top: 15px;
-      width: 100%;
       padding: 12px;
       font-size: 16px;
-      background: var(--primary);
-      color: white;
+      font-weight: bold;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+      background: #007bff;
+      color: white;
+      transition: background 0.3s ease;
     }
 
     button:hover {
-      background: #0b5ed7;
+      background: #0056b3;
+    }
+
+    #hasilVerifikasi {
+      margin-top: 20px;
+      animation: fadeInUp 0.5s ease;
     }
 
     table {
       width: 100%;
-      margin-top: 20px;
       border-collapse: collapse;
-      background-color: #2c2c2c;
-      border-radius: 8px;
-      overflow: hidden;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     th, td {
       padding: 12px;
-      border-bottom: 1px solid #444;
+      border: 1px solid;
       text-align: left;
-      color: var(--text-light);
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     th {
-      background-color: #333;
+      background-color: rgba(0, 123, 255, 0.8);
       color: #fff;
     }
 
-    .result {
-      margin-top: 20px;
-      font-size: 16px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    .success {
-      color: var(--success);
-    }
-
-    .error {
-      color: var(--danger);
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
       .container {
+        margin: 20px;
         padding: 20px;
       }
     }
@@ -121,30 +135,30 @@
 </head>
 <body>
   <div class="container">
-    <h2>🔍 Verifikasi Tanda Tangan Elektronik</h2>
+    <h2>Verifikasi Tanda Tangan Elektronik</h2>
     <form id="formVerifikasi">
-      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat Contoh: 001/SM/2025" required>
+      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
       <button type="submit">Verifikasi</button>
     </form>
-    <div id="hasilVerifikasi" class="result"></div>
+    <div id="hasilVerifikasi"></div>
   </div>
 
   <script>
     const dataSurat = {
-      "001.010/SM-STITNU/VII/25": {
+      "001/SM/2025": {
         judul: "Undangan Rapat Koordinasi",
         tanggal: "20 Juli 2025",
-        pengirim: "Senat Mahasiswa STITNU Al-Farabi"
+        pengirim: "Senat Mahasiswa STITNU Al-Farabi Pangandaran"
       },
       "002/SM/2025": {
         judul: "Surat Tugas Kegiatan Sosial",
         tanggal: "15 Juli 2025",
-        pengirim: "Ketua Senat Mahasiswa STITNU"
+        pengirim: "Ketua Umum Senat Mahasiswa"
       },
       "003/SM/2025": {
-        judul: "Notulen Rapat Akhir Semester",
+        judul: "Pemberitahuan Pelantikan",
         tanggal: "10 Juli 2025",
-        pengirim: "Sekretaris Senat Mahasiswa"
+        pengirim: "Divisi Kominfo & Kreatif"
       }
     };
 
@@ -153,24 +167,26 @@
       const nomor = document.getElementById('nomorSurat').value.trim();
       const hasil = document.getElementById('hasilVerifikasi');
 
-      if (nomor === "") {
-        hasil.innerHTML = `<div class="error">❌ Nomor surat tidak boleh kosong.</div>`;
+      if (nomor === '') {
+        hasil.innerHTML = `<p style="color: red;">⚠️ Nomor surat tidak boleh kosong.</p>`;
         return;
       }
 
       if (dataSurat[nomor]) {
         const surat = dataSurat[nomor];
         hasil.innerHTML = `
-          <div class="success">✅ Surat TERVERIFIKASI</div>
-          <table>
-            <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
-            <tr><th>Judul</th><td>${surat.judul}</td></tr>
-            <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
-            <tr><th>Pengirim</th><td>${surat.pengirim}</td></tr>
-          </table>
+          <div style="color: green;">
+            <p>✅ Surat <strong>TERVERIFIKASI</strong></p>
+            <table>
+              <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
+              <tr><th>Judul</th><td>${surat.judul}</td></tr>
+              <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
+              <tr><th>Pengirim</th><td>${surat.pengirim}</td></tr>
+            </table>
+          </div>
         `;
       } else {
-        hasil.innerHTML = `<div class="error">❌ Nomor surat <strong>${nomor}</strong> tidak ditemukan dalam sistem.</div>`;
+        hasil.innerHTML = `<p style="color: red;">❌ Nomor surat <strong>tidak ditemukan</strong>.</p>`;
       }
     });
   </script>
