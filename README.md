@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -146,10 +145,10 @@
 
   <script>
     const dataSurat = {
-      "001/SM/2025": {
-        judul: "Undangan Rapat Koordinasi",
-        tanggal: "20 Juli 2025",
-        pengirim: "Senat Mahasiswa STITNU Al-Farabi Pangandaran"
+      "01.010/KMH-STITNU/7052/V/2025": {
+        judul: "Pengangkatan Pengurus Senat Mahasiswa STITNU AL-FARABI 2025-2026",
+        tanggal: "21 Mei 2025",
+        pengirim: "Ketua STITNU Al-Farabi Pangandaran"
       },
       "002/SM/2025": {
         judul: "Surat Tugas Kegiatan Sosial",
@@ -180,9 +179,9 @@
             <p>✅ Surat <strong>TERVERIFIKASI</strong></p>
             <table>
               <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
-              <tr><th>Judul</th><td>${surat.judul}</td></tr>
+              <tr><th>Perihal</th><td>${surat.judul}</td></tr>
               <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
-              <tr><th>Pengirim</th><td>${surat.pengirim}</td></tr>
+              <tr><th>Ditandatangani</th><td>${surat.pengirim}</td></tr>
             </table>
           </div>
         `;
