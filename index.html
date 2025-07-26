@@ -1,185 +1,265 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verifikasi Surat</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifikasi Surat SENAT MAHASISWA</title>
   <style>
     :root {
       color-scheme: light dark;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #000;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7ff, #d5e8ff);
+      color: var(--text-color, #000000);
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     @media (prefers-color-scheme: dark) {
       body {
-        background-color: #121212;
-        color: #ffffff;
+        --bg-color: #121212;
+        --text-color: #ffffff;
+        background: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
       }
 
-      input, button, table {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        border-color: #444;
+      table, th, td {
+        border-color: #ffffff;
       }
 
-      th, td {
-        border-color: #444;
+      .popup {
+        background-color: #333;
+        color: #fff;
       }
     }
 
-    h1 {
-      text-align: center;
-      margin-top: 2rem;
+    @media (prefers-color-scheme: light) {
+      body {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+      }
+
+      table, th, td {
+        border-color: #000000;
+      }
+
+      .popup {
+        background-color: #f0f0f0;
+        color: #000;
+      }
     }
 
     .container {
       max-width: 600px;
-      margin: auto;
-      padding: 20px;
+      margin: 5vh auto;
+      padding: 30px 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease;
     }
 
-    .form-group {
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    form {
       display: flex;
       flex-direction: column;
-      margin-bottom: 1rem;
+      gap: 12px;
     }
 
-    label {
-      margin-bottom: 0.5rem;
-    }
-
-    input {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
+    input[type="text"] {
+      padding: 14px;
+      font-size: 1rem;
       border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    input[type="text"]::placeholder {
+      color: #888;
     }
 
     button {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background-color: #007bff;
-      color: white;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
-      width: 100%;
+      background: linear-gradient(to right, #007bff, #00b4ff);
+      color: white;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background: linear-gradient(to right, #0056b3, #0093d0);
+      transform: translateY(-2px);
     }
 
-    .btn-center {
-      display: flex;
-      justify-content: center;
+    #hasilVerifikasi {
+      margin-top: 20px;
+      animation: fadeInUp 0.6s ease;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-top: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      overflow-x: auto;
+      display: block;
     }
 
     th, td {
       padding: 12px;
+      border: 1px solid;
       text-align: left;
-      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
-    .whatsapp-btn {
-      display: block;
-      margin: 2rem auto;
-      background-color: #25D366;
-      color: white;
-      text-align: center;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      width: fit-content;
-      transition: background-color 0.3s;
+    th {
+      background-color: rgba(0, 123, 255, 0.85);
+      color: #fff;
     }
 
-    .whatsapp-btn:hover {
-      background-color: #1ebd5b;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    .fade-in {
-      animation: fade 0.5s ease-in-out;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      z-index: 999;
+    }
+
+    .popup.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      input[type="text"],
+      button {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .popup {
+        width: calc(100% - 40px);
+        right: 20px;
+        bottom: 20px;
+        font-size: 0.9rem;
+      }
+
+      table th, table td {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Verifikasi Nomor Surat</h1>
   <div class="container">
-    <div class="form-group">
-      <label for="nomorSurat">Masukkan Nomor Surat:</label>
-      <input type="text" id="nomorSurat" placeholder="Contoh: 123/SMT/07A-KM/2024" />
-    </div>
-    <div class="btn-center">
-      <button onclick="verifikasiSurat()">Verifikasi</button>
-    </div>
+   <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
 
-    <div id="hasilVerifikasi" class="fade-in"></div>
-
-    <a id="waButton" class="whatsapp-btn" target="_blank" style="display: none;">
-      Konfirmasi via WhatsApp
-    </a>
+    <h2>Verifikasi Surat Senat Mahasiswa</h2>
+    <form id="formVerifikasi">
+      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
+      <button type="submit">Verifikasi</button>
+    </form>
+    <div id="hasilVerifikasi"></div>
   </div>
+
+  <div class="popup" id="popupNotif"></div>
 
   <script>
     const dataSurat = {
-      "02.001/SM-STITNU/VII/25": {
-        nama: "Undangan Rapat Anggota",
-        judul: "26, Juli 2025",
-        tanggal: "Ketua Senat Mahasiswa",
-        status: "Terverifikasi ✅"
-      },
-      "456/SMT/08B-KM/2024": {
-        nama: "Senat Mahasiswa STITNU Al-Farabi",
-        judul: "Pengumuman Penerimaan Anggota Baru",
-        tanggal: "1 Agustus 2024",
-        status: "Terverifikasi ✅"
+      "01.010/KMH-STITNU/7052/V/2025": {
+        judul: "Pengangkatan Pengurus Senat Mahasiswa STITNU AL-FARABI 2025-2026",
+        tanggal: "21 Mei 2025",
+        pengirim: "Ketua STITNU Al-Farabi Pangandaran"
       }
     };
 
-    function verifikasiSurat() {
-      const input = document.getElementById("nomorSurat").value.trim();
-      const hasilDiv = document.getElementById("hasilVerifikasi");
-      const waBtn = document.getElementById("waButton");
-
-      if (dataSurat[input]) {
-        const surat = dataSurat[input];
-        hasilDiv.innerHTML = `
-          <table>
-            <tr><th>Nomor Surat</th><td>${input}</td></tr>
-            <tr><th>Perihal</th><td>${surat.nama}</td></tr>
-            <tr><th>Tanggal/th><td>${surat.judul}</td></tr>
-            <tr><th>Ditandatangani</th><td>${surat.tanggal}</td></tr>
-            <tr><th>Status</th><td>${surat.status}</td></tr>
-          </table>
-        `;
-        waBtn.href = `https://wa.me/6281234567890?text=Halo%20saya%20ingin%20konfirmasi%20tentang%20surat%20dengan%20nomor:%20${encodeURIComponent(input)}`;
-        waBtn.style.display = "block";
-      } else {
-        hasilDiv.innerHTML = `<p style="color:red;">Nomor surat tidak ditemukan atau belum diverifikasi.</p>`;
-        waBtn.style.display = "none";
-      }
+    function showPopup(message, success = true) {
+      const popup = document.getElementById('popupNotif');
+      popup.textContent = message;
+      popup.style.backgroundColor = success ? 'rgba(0,200,100,0.9)' : 'rgba(255,50,50,0.9)';
+      popup.classList.add('show');
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 3000);
     }
+
+    document.getElementById('formVerifikasi').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nomor = document.getElementById('nomorSurat').value.trim();
+      const hasil = document.getElementById('hasilVerifikasi');
+
+      if (nomor === '') {
+        hasil.innerHTML = '';
+        showPopup('⚠ Nomor surat tidak boleh kosong.', false);
+        return;
+      }
+
+      if (dataSurat[nomor]) {
+        const surat = dataSurat[nomor];
+        hasil.innerHTML = `
+          <div style="color: green;">
+            <p>✅ <strong>Surat Terverifikasi</strong></p>
+            <table>
+              <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
+              <tr><th>Perihal</th><td>${surat.judul}</td></tr>
+              <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
+              <tr><th>Ditandatangani</th><td>${surat.pengirim}</td></tr>
+            </table>
+          </div>
+        `;
+        showPopup('✅ Surat Terverifikasi');
+      } else {
+        hasil.innerHTML = <p style="color: red;">❌ <strong>Nomor surat tidak ditemukan.</strong></p>;
+        showPopup('❌ Nomor surat tidak ditemukan.', false);
+      }
+    });
   </script>
 </body>
 </html>
