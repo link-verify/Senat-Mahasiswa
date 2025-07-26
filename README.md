@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -6,6 +7,10 @@
   <style>
     :root {
       color-scheme: light dark;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -51,8 +56,8 @@
 
     .container {
       max-width: 600px;
-      margin: 80px auto;
-      padding: 30px;
+      margin: 5vh auto;
+      padding: 30px 20px;
       background: rgba(255,255,255,0.1);
       backdrop-filter: blur(15px);
       border-radius: 16px;
@@ -64,7 +69,7 @@
       text-align: center;
       margin-bottom: 20px;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
 
     form {
@@ -75,13 +80,12 @@
 
     input[type="text"] {
       padding: 14px;
-      font-size: 16px;
+      font-size: 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
       outline: none;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: all 0.3s ease;
     }
 
     input[type="text"]::placeholder {
@@ -90,7 +94,7 @@
 
     button {
       padding: 14px;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: bold;
       border: none;
       border-radius: 8px;
@@ -115,6 +119,8 @@
       border-collapse: collapse;
       margin-top: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      overflow-x: auto;
+      display: block;
     }
 
     th, td {
@@ -139,13 +145,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 20px;
-      }
-    }
-
     .popup {
       position: fixed;
       bottom: 30px;
@@ -166,11 +165,42 @@
       transform: translateY(0);
       pointer-events: auto;
     }
+
+    img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      input[type="text"],
+      button {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .popup {
+        width: calc(100% - 40px);
+        right: 20px;
+        bottom: 20px;
+        font-size: 0.9rem;
+      }
+
+      table th, table td {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-     <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+    <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa">
     <h2>Verifikasi Surat Senat Mahasiswa</h2>
     <form id="formVerifikasi">
       <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
@@ -215,7 +245,7 @@
         const surat = dataSurat[nomor];
         hasil.innerHTML = `
           <div style="color: green;">
-            <p>Surat<strong>Terverifikasi</strong></p>
+            <p>✅ <strong>Surat Terverifikasi</strong></p>
             <table>
               <tr><th>Nomor Surat</th><td>${nomor}</td></tr>
               <tr><th>Perihal</th><td>${surat.judul}</td></tr>
@@ -224,9 +254,9 @@
             </table>
           </div>
         `;
-        showPopup('Surat Terverivikasi.');
+        showPopup('✅ Surat Terverifikasi');
       } else {
-        hasil.innerHTML = `<p style="color: red;">❌<strong>tidak ditemukan</strong>.</p>`;
+        hasil.innerHTML = `<p style="color: red;">❌ <strong>Nomor surat tidak ditemukan.</strong></p>`;
         showPopup('❌ Nomor surat tidak ditemukan.', false);
       }
     });
