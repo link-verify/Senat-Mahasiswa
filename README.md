@@ -1,164 +1,165 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Verifikasi Surat | STITNU</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verifikasi Surat | Senat Mahasiswa STITNU</title>
   <style>
     :root {
-      --bg-color-light: #ffffff;
-      --text-color-light: #000000;
-      --bg-color-dark: #121212;
-      --text-color-dark: #ffffff;
-      --accent-color: #1e90ff;
+      color-scheme: light dark;
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      transition: background-color 0.5s ease, color 0.5s ease;
-      background-color: var(--bg-color-light);
-      color: var(--text-color-light);
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 2rem;
     }
 
     @media (prefers-color-scheme: dark) {
       body {
-        background-color: var(--bg-color-dark);
-        color: var(--text-color-dark);
+        background-color: #121212;
+        color: #fff;
+      }
+
+      input, button {
+        background-color: #1e1e1e;
+        color: #fff;
+        border: 1px solid #444;
       }
 
       table {
         background-color: #1e1e1e;
+        color: #fff;
       }
 
       th, td {
-        color: #f0f0f0;
+        border-color: #333;
       }
-
-      input, button {
-        background-color: #222;
-        color: #fff;
-        border: 1px solid #444;
-      }
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-      background: inherit;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
     }
 
     h1 {
       text-align: center;
-      color: var(--accent-color);
+      margin-bottom: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
     input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+      padding: 0.75rem;
+      font-size: 1rem;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 16px;
+      border-radius: 6px;
+      transition: all 0.3s;
     }
 
     button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      background-color: var(--accent-color);
-      color: white;
+      padding: 0.75rem;
+      font-size: 1rem;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      background-color: #0066cc;
+      color: white;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: #187bcd;
+      background-color: #004999;
     }
 
-    .result-table {
-      margin-top: 20px;
+    table {
       width: 100%;
       border-collapse: collapse;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin-top: 1rem;
       animation: fadeIn 0.5s ease-in-out;
     }
 
     th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
       text-align: left;
     }
 
-    @media screen and (max-width: 600px) {
-      .container {
-        margin: 20px 10px;
-        padding: 15px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
       }
 
       h1 {
-        font-size: 1.5em;
+        font-size: 1.5rem;
+      }
+
+      table, th, td {
+        font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Verifikasi Surat</h1>
-    <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" />
-    <button onclick="verifikasiSurat()">Verifikasi</button>
-
+    <h1>Verifikasi Nomor Surat</h1>
+    <div class="form-group">
+      <input type="text" id="nomorSurat" placeholder="Masukkan nomor surat..." />
+      <button onclick="verifikasiSurat()">Verifikasi</button>
+    </div>
     <div id="hasilVerifikasi"></div>
   </div>
 
   <script>
     const dataSurat = [
       {
-        nomor: "001/SM/07/2025",
-        nama: "Syadad Nabil Mudzafar",
-        perihal: "Pelantikan Senat Mahasiswa",
-        tanggal: "20 Juli 2025",
-        status: "Terverifikasi"
+        nomor: "001/SM-STITNU/2024",
+        judul: "Undangan Rapat Kerja",
+        instansi: "Senat Mahasiswa STITNU Al-Farabi",
+        tanggal: "2024-01-15",
+        status: "TERVERIFIKASI ✅"
       },
       {
-        nomor: "002/SM/07/2025",
-        nama: "Rismah Nurani",
-        perihal: "Undangan Rapat Akbar",
-        tanggal: "18 Juli 2025",
-        status: "Terverifikasi"
+        nomor: "002/SM-STITNU/2024",
+        judul: "Pemberitahuan Pelantikan",
+        instansi: "Senat Mahasiswa STITNU Al-Farabi",
+        tanggal: "2024-02-20",
+        status: "TERVERIFIKASI ✅"
       }
     ];
 
     function verifikasiSurat() {
       const input = document.getElementById("nomorSurat").value.trim();
-      const hasil = document.getElementById("hasilVerifikasi");
-      const surat = dataSurat.find(item => item.nomor === input);
+      const hasilDiv = document.getElementById("hasilVerifikasi");
+
+      const surat = dataSurat.find(s => s.nomor.toLowerCase() === input.toLowerCase());
 
       if (surat) {
-        hasil.innerHTML = `
-          <table class="result-table">
+        hasilDiv.innerHTML = `
+          <table>
             <tr><th>Nomor Surat</th><td>${surat.nomor}</td></tr>
-            <tr><th>Nama</th><td>${surat.nama}</td></tr>
-            <tr><th>Perihal</th><td>${surat.perihal}</td></tr>
+            <tr><th>Judul</th><td>${surat.judul}</td></tr>
+            <tr><th>Instansi</th><td>${surat.instansi}</td></tr>
             <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
-            <tr><th>Status</th><td style="color: limegreen;"><strong>${surat.status}</strong></td></tr>
+            <tr><th>Status</th><td style="color:limegreen; font-weight: bold;">${surat.status}</td></tr>
           </table>
         `;
       } else {
-        hasil.innerHTML = `<p style="color: red; text-align: center; margin-top: 15px;">Nomor surat tidak ditemukan.</p>`;
+        hasilDiv.innerHTML = `<p style="color:tomato; font-weight:bold;">❌ Nomor surat tidak ditemukan atau tidak valid.</p>`;
       }
     }
   </script>
