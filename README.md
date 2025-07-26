@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Verifikasi Surat SENAT MAHASISWA</title>
   <style>
     :root {
@@ -74,7 +73,7 @@
       gap: 12px;
     }
 
-    input[type="text"], input[type="email"] {
+    input[type="text"] {
       padding: 14px;
       font-size: 16px;
       border-radius: 8px;
@@ -130,6 +129,23 @@
       color: #fff;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+
     .popup {
       position: fixed;
       bottom: 30px;
@@ -150,38 +166,6 @@
       transform: translateY(0);
       pointer-events: auto;
     }
-
-    .hidden-form {
-      margin-top: 20px;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.5s ease;
-      transform: translateY(-10px);
-    }
-
-    .hidden-form.show {
-      opacity: 1;
-      max-height: 1000px;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 20px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -192,15 +176,6 @@
       <button type="submit">Verifikasi</button>
     </form>
     <div id="hasilVerifikasi"></div>
-
-    <!-- Form Tambahan -->
-    <div id="formTambahan" class="hidden-form">
-      <h3>Form Input Tambahan</h3>
-      <input type="text" placeholder="Nama Lengkap">
-      <input type="email" placeholder="Email">
-      <input type="text" placeholder="NIM / ID Mahasiswa">
-      <button>Kirim Data</button>
-    </div>
   </div>
 
   <div class="popup" id="popupNotif"></div>
@@ -214,18 +189,6 @@
       }
     };
 
-    const formTambahan = document.getElementById('formTambahan');
-    const inputSurat = document.getElementById('nomorSurat');
-
-    inputSurat.addEventListener('input', function () {
-      const nilai = inputSurat.value.trim().toUpperCase();
-      if (nilai === "INPUT ADD") {
-        formTambahan.classList.add('show');
-      } else {
-        formTambahan.classList.remove('show');
-      }
-    });
-
     function showPopup(message, success = true) {
       const popup = document.getElementById('popupNotif');
       popup.textContent = message;
@@ -238,7 +201,7 @@
 
     document.getElementById('formVerifikasi').addEventListener('submit', function(e) {
       e.preventDefault();
-      const nomor = inputSurat.value.trim();
+      const nomor = document.getElementById('nomorSurat').value.trim();
       const hasil = document.getElementById('hasilVerifikasi');
 
       if (nomor === '') {
