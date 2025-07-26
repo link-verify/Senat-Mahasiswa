@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Verifikasi Surat TTE</title>
+  <title>Verifikasi Surat SENAT MAHASISWA</title>
   <style>
     :root {
       color-scheme: light dark;
@@ -135,7 +135,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>Verifikasi Tanda Tangan Elektronik</h2>
+    <h2>Verifikasi Tanda Surat Senat Mahasiswa</h2>
     <form id="formVerifikasi">
       <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
       <button type="submit">Verifikasi</button>
@@ -150,18 +150,6 @@
         tanggal: "21 Mei 2025",
         pengirim: "Ketua STITNU Al-Farabi Pangandaran"
       },
-      "002/SM/2025": {
-        judul: "Surat Tugas Kegiatan Sosial",
-        tanggal: "15 Juli 2025",
-        pengirim: "Ketua Umum Senat Mahasiswa"
-      },
-      "003/SM/2025": {
-        judul: "Pemberitahuan Pelantikan",
-        tanggal: "10 Juli 2025",
-        pengirim: "Divisi Kominfo & Kreatif"
-      }
-    };
-
     document.getElementById('formVerifikasi').addEventListener('submit', function(e) {
       e.preventDefault();
       const nomor = document.getElementById('nomorSurat').value.trim();
