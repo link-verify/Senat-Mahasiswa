@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Surat SENAT MAHASISWA</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifikasi Surat SENAT MAHASISWA</title>
   <style>
     :root {
       color-scheme: light dark;
@@ -200,7 +199,8 @@
 </head>
 <body>
   <div class="container">
-    <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa">
+   <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+
     <h2>Verifikasi Surat Senat Mahasiswa</h2>
     <form id="formVerifikasi">
       <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
@@ -217,11 +217,6 @@
         judul: "Pengangkatan Pengurus Senat Mahasiswa STITNU AL-FARABI 2025-2026",
         tanggal: "21 Mei 2025",
         pengirim: "Ketua STITNU Al-Farabi Pangandaran"
-      },
-      "02.001/SM-STITNU/VII/25": {
-        judul: "Undangan Rapat Anggota",
-        tanggal: "26 Juli 2025",
-        pengirim: "Ketua Senat Mahasiswa"
       }
     };
 
@@ -261,7 +256,7 @@
         `;
         showPopup('✅ Surat Terverifikasi');
       } else {
-        hasil.innerHTML = `<p style="color: red;">❌ <strong>Nomor surat tidak ditemukan.</strong></p>`;
+        hasil.innerHTML = <p style="color: red;">❌ <strong>Nomor surat tidak ditemukan.</strong></p>;
         showPopup('❌ Nomor surat tidak ditemukan.', false);
       }
     });
