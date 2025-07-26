@@ -143,10 +143,10 @@
 
   <script>
     const dataSurat = {
-      "123/SMT/07A-KM/2024": {
-        nama: "Senat Mahasiswa STITNU Al-Farabi",
-        judul: "Undangan Musyawarah Besar",
-        tanggal: "20 Juli 2024",
+      "02.001/SM-STITNU/VII/25": {
+        nama: "Undangan Rapat Anggota",
+        judul: "26, Juli 2025",
+        tanggal: "Ketua Senat Mahasiswa",
         status: "Terverifikasi ✅"
       },
       "456/SMT/08B-KM/2024": {
@@ -167,9 +167,9 @@
         hasilDiv.innerHTML = `
           <table>
             <tr><th>Nomor Surat</th><td>${input}</td></tr>
-            <tr><th>Instansi</th><td>${surat.nama}</td></tr>
-            <tr><th>Judul</th><td>${surat.judul}</td></tr>
-            <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
+            <tr><th>Perihal</th><td>${surat.nama}</td></tr>
+            <tr><th>Tanggal/th><td>${surat.judul}</td></tr>
+            <tr><th>Ditandatangani</th><td>${surat.tanggal}</td></tr>
             <tr><th>Status</th><td>${surat.status}</td></tr>
           </table>
         `;
