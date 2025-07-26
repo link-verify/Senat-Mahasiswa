@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verifikasi Surat</title>
   <style>
     :root {
@@ -13,136 +13,94 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+      background: linear-gradient(to bottom right, #222, #333);
       color: #fff;
-      transition: all 0.3s ease;
-    }
-
-    @media (prefers-color-scheme: light) {
-      body {
-        background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-        color: #000;
-      }
-
-      .container {
-        background: #ffffff;
-        color: #000;
-      }
-
-      table {
-        background-color: #fafafa;
-        color: #000;
-      }
-
-      input, button {
-        background-color: #eaeaea;
-        color: #000;
-      }
     }
 
     .container {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      max-width: 900px;
+      margin: 50px auto;
+      background: #2c2c2c;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 15px;
+      transition: all 0.4s ease-in-out;
     }
 
-    h1 {
+    h2 {
       text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    input {
-      padding: 10px;
-      width: 100%;
-      max-width: 500px;
-      border-radius: 6px;
-      border: none;
-    }
-
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #45a049;
+      margin-bottom: 20px;
+      color: #f0f0f0;
     }
 
     table {
       width: 100%;
-      margin-top: 2rem;
       border-collapse: collapse;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    thead {
+      background: linear-gradient(to right, #444, #666);
     }
 
     th, td {
-      padding: 12px;
+      padding: 15px;
       text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid #444;
     }
 
     tr:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.08);
     }
 
     .popup {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #4caf50;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 6px;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.5s ease;
-      z-index: 1000;
+      animation: fadeInUp 0.8s ease both;
     }
 
-    .popup.show {
-      opacity: 1;
-      pointer-events: auto;
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .btn-view {
+      padding: 8px 12px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn-view:hover {
+      background: #43a047;
     }
 
     @media screen and (max-width: 600px) {
       th, td {
         font-size: 14px;
+        padding: 10px;
       }
 
-      input {
-        width: 90%;
+      .container {
+        margin: 20px;
+        padding: 15px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="popup" id="popup">Surat berhasil diverifikasi!</div>
-
-  <div class="container">
-    <h1>Verifikasi Surat</h1>
-    <form id="verifyForm">
-      <input type="text" id="noSurat" placeholder="Masukkan Nomor Surat" required />
-      <button type="submit">Verifikasi</button>
-    </form>
-
-    <table id="resultTable" style="display:none;">
+  <div class="container popup">
+    <h2>Verifikasi Surat</h2>
+    <table>
       <thead>
         <tr>
           <th>Nomor Surat</th>
@@ -150,66 +108,28 @@
           <th>Tanggal</th>
           <th>Ditandatangani Oleh</th>
           <th>Status</th>
-          <th>Lihat Surat</th>
+          <th>Lihat</th>
         </tr>
       </thead>
-      <tbody id="resultBody"></tbody>
+      <tbody>
+        <tr>
+          <td>001/SM/24A-ST/2024</td>
+          <td>Undangan Rapat</td>
+          <td>20 Juli 2024</td>
+          <td>Syadad Nabil</td>
+          <td>✅ Terverifikasi</td>
+          <td><a href="surat.jpg" target="_blank" class="btn-view">Lihat Surat</a></td>
+        </tr>
+        <tr>
+          <td>002/SM/24A-ST/2024</td>
+          <td>Pemberitahuan</td>
+          <td>23 Juli 2024</td>
+          <td>Dewi Lestari</td>
+          <td>✅ Terverifikasi</td>
+          <td><a href="surat2.jpg" target="_blank" class="btn-view">Lihat Surat</a></td>
+        </tr>
+      </tbody>
     </table>
   </div>
-
-  <script>
-    const dataSurat = [
-      {
-        no: '001/SM/STITNU/2025',
-        perihal: 'Undangan Rapat',
-        tanggal: '20 Juli 2025',
-        oleh: 'Ketua Senat Mahasiswa',
-        status: 'Terverifikasi',
-        file: 'surat1.jpg'
-      },
-      {
-        no: '002/SM/STITNU/2025',
-        perihal: 'Pemberitahuan Acara',
-        tanggal: '22 Juli 2025',
-        oleh: 'Sekretaris Senat',
-        status: 'Terverifikasi',
-        file: 'surat2.jpg'
-      }
-    ];
-
-    const form = document.getElementById('verifyForm');
-    const popup = document.getElementById('popup');
-    const table = document.getElementById('resultTable');
-    const body = document.getElementById('resultBody');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = document.getElementById('noSurat').value.trim();
-      const found = dataSurat.find(surat => surat.no === input);
-
-      if (found) {
-        popup.textContent = 'Surat berhasil diverifikasi!';
-        popup.classList.add('show');
-        setTimeout(() => popup.classList.remove('show'), 3000);
-
-        body.innerHTML = `
-          <tr>
-            <td>${found.no}</td>
-            <td>${found.perihal}</td>
-            <td>${found.tanggal}</td>
-            <td>${found.oleh}</td>
-            <td>${found.status}</td>
-            <td><a href="${found.file}" target="_blank">Lihat Surat</a></td>
-          </tr>
-        `;
-        table.style.display = 'table';
-      } else {
-        popup.textContent = 'Nomor surat tidak ditemukan.';
-        popup.classList.add('show');
-        setTimeout(() => popup.classList.remove('show'), 3000);
-        table.style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
