@@ -225,8 +225,7 @@
         `;
         showPopup('Surat Terverivikasi.');
       } else {
-        hasil.innerHTML = ;
-        showPopup('❌ Nomor surat tidak ditemukan.', false);
+        hasil.innerHTML = showPopup('❌ Nomor surat tidak ditemukan.', false);
       }
     });
   </script>
