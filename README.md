@@ -169,9 +169,9 @@
   </style>
 </head>
 <body>
-  <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
   <div class="container">
-    <h2>Verifikasi Tanda Surat Senat Mahasiswa</h2>
+     <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+    <h2>Verifikasi Surat Senat Mahasiswa</h2>
     <form id="formVerifikasi">
       <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required>
       <button type="submit">Verifikasi</button>
