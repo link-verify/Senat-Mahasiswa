@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -262,8 +261,5 @@
       }
     });
   </script>
-  <a href="<a href="BERANDA" class="btn-beranda">🏠 Ke Beranda</a>
-" class="btn-beranda">🏠 Ke Beranda</a>
-
 </body>
 </html>
