@@ -261,5 +261,8 @@
       }
     });
   </script>
+  <a href="<a href="BERANDA" class="btn-beranda">🏠 Ke Beranda</a>
+" class="btn-beranda">🏠 Ke Beranda</a>
+
 </body>
 </html>
