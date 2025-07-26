@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Website Senat Mahasiswa</title>
+  <title>Profil Senat Mahasiswa</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #e3f2fd, #bbdefb);
-      color: #0d47a1;
-      padding-top: 80px;
-      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+      padding-top: 90px;
     }
 
     .nav {
@@ -25,84 +18,85 @@
       left: 50%;
       transform: translateX(-50%);
       background: white;
-      border-radius: 50px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border-radius: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       display: flex;
       gap: 1rem;
-      padding: 12px 30px;
+      padding: 10px 30px;
       z-index: 1000;
-      animation: fadeInDown 1s ease;
+      animation: fadeInDown 0.8s ease;
     }
 
     .nav a {
       text-decoration: none;
       color: #1976d2;
       font-weight: 600;
-      padding: 8px 15px;
+      padding: 8px 18px;
       border-radius: 30px;
-      transition: background 0.3s, transform 0.2s;
+      transition: background 0.3s;
     }
 
     .nav a:hover {
-      background: #e3f2fd;
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      background-color: #e3f2fd;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
       padding: 2rem;
-      background: white;
+      background: #fff;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       animation: fadeInUp 1s ease;
     }
 
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    h1 {
-      text-align: center;
+    h1, h2 {
       color: #0d47a1;
-      margin-bottom: 1rem;
+      text-align: center;
     }
 
-    p {
-      line-height: 1.8;
-      font-size: 1.1rem;
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .struktur {
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: #e3f2fd;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .struktur p {
+      margin: 6px 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
       .nav {
         flex-wrap: wrap;
         justify-content: center;
-        padding: 10px 15px;
         gap: 0.5rem;
+        padding: 10px 15px;
       }
+
       .container {
         padding: 1.2rem;
-      }
-      p {
-        font-size: 1rem;
       }
     }
   </style>
@@ -113,19 +107,59 @@
   <nav class="nav">
     <a href="index.html">Beranda</a>
     <a href="aspirasi.html">Aspirasi</a>
-    <a href="verifikasi.html">Verifikasi Surat</a>
+    <a href="verifikasi.html">Verifikasi</a>
     <a href="agenda.html">Agenda</a>
     <a href="profil.html">Profil</a>
   </nav>
 
-  <!-- ISI HALAMAN BERANDA -->
+  <!-- PROFIL -->
   <div class="container">
-    <h1>Selamat Datang di Website Senat Mahasiswa</h1>
-    <p>
-      Ini adalah halaman utama dari website Senat Mahasiswa STITNU Al-Farabi Pangandaran.
-      Silakan gunakan menu di atas untuk menavigasi ke halaman aspirasi, verifikasi surat, agenda kegiatan, dan profil pengurus senat.
-    </p>
-  </div>
+    <h1>Profil Senat Mahasiswa STITNU Al-Farabi</h1>
 
+    <h2>Tentang Kami</h2>
+    <p>
+      Senat Mahasiswa (SEMA) STITNU Al-Farabi Pangandaran adalah lembaga legislatif mahasiswa
+      yang berperan dalam menyalurkan aspirasi, mengawasi jalannya kegiatan kemahasiswaan, serta
+      memperkuat karakter dan kepemimpinan mahasiswa.
+    </p>
+
+    <h2>Visi</h2>
+    <p>
+      Menjadikan SEMA sebagai wadah aspiratif dan partisipatif dalam membangun tata kelola organisasi kemahasiswaan yang transparan dan berintegritas.
+    </p>
+
+    <h2>Misi</h2>
+    <ul>
+      <li>Mengembangkan budaya organisasi yang demokratis, jujur, dan profesional.</li>
+      <li>Mendorong transparansi dan pengawasan terhadap program kemahasiswaan.</li>
+      <li>Mewujudkan ruang aspirasi yang komunikatif dan solutif.</li>
+      <li>Membangun solidaritas antarorganisasi dan seluruh civitas kampus.</li>
+    </ul>
+
+    <h2>Struktur Organisasi 2025–2026</h2>
+    <div class="struktur">
+      <p><strong>Ketua:</strong> Syaddad Nabil Mudzafar</p>
+      <p><strong>Sekretaris:</strong> Ai Siska Silvia</p>
+      <p><strong>Bendahara:</strong> Halimatussa’diah</p>
+      <br/>
+      <p><strong>Komisi 1 - Hukum & Legislasi:</strong></p>
+      <ul>
+        <li>Siti Khoeriyah</li>
+        <li>Dede Yusuf Z</li>
+      </ul>
+      <p><strong>Komisi 2 - Auditing & Budgeting:</strong></p>
+      <ul>
+        <li>Fajar Saripudin</li>
+        <li>Nelis Sopariah</li>
+        <li>Halimatussa’diah</li>
+      </ul>
+      <p><strong>Komisi 3 - Aspirasi & Kebijakan Publik:</strong></p>
+      <ul>
+        <li>Widayanti</li>
+        <li>Asri Sawalianti</li>
+        <li>Rahma Ramadani</li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
