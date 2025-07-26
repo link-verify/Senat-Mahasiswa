@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beranda Senat Mahasiswa</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
+      color: #0d47a1;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      max-width: 900px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #0d47a1;
+    }
+
+    .info {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: #2196f3;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    .btn:hover {
+      background: #1976d2;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.2rem;
+      }
+      .info {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Datang di Website Senat Mahasiswa</h1>
+    <p class="info">
+      Website resmi Senat Mahasiswa STITNU Al-Farabi Pangandaran. 
+      Di sini kamu bisa menemukan informasi terkini terkait kegiatan, program kerja, pengumuman, hingga publikasi surat resmi.
+    </p>
+
+    <div class="button-group">
+      <button class="btn" onclick="location.href='verifikasi.html'">Verifikasi Surat</button>
+      <button class="btn" onclick="location.href='agenda.html'">Agenda Kegiatan</button>
+      <button class="btn" onclick="location.href='profil.html'">Profil Senat</button>
+    </div>
+  </div>
+</body>
+</html>
