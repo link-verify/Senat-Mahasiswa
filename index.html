@@ -1,148 +1,188 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Verifikasi Surat Senat Mahasiswa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifikasi Surat</title>
   <style>
+    :root {
+      color-scheme: light dark;
+    }
+
     body {
-      background: linear-gradient(to bottom right, #222, #444);
-      font-family: 'Segoe UI', sans-serif;
-      color: #f4f4f4;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #1a1a1a, #2c3e50);
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
     }
 
-    .verifikasi-container {
-      background: #2c2c2c;
+    .container {
+      background-color: #ffffff10;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      width: 90%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
       max-width: 600px;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    h2 {
+      width: 100%;
       text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8em;
       margin-bottom: 20px;
       color: #fff;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 15px;
-      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
       border: none;
-      margin-bottom: 20px;
-      font-size: 16px;
+      border-radius: 8px;
+      background-color: #2c2c2c;
+      color: #fff;
+      font-size: 1em;
     }
 
     button {
-      background: #4caf50;
-      color: white;
       padding: 12px 20px;
+      background: #00a8ff;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-weight: bold;
+      color: white;
       cursor: pointer;
-      width: 100%;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background: #43a047;
+      background: #0097e6;
     }
 
-    .result {
+    table {
+      width: 100%;
       margin-top: 20px;
-      padding: 20px;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       border-radius: 10px;
-      background: #333;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      display: none;
+      overflow: hidden;
     }
 
-    .result p {
-      margin: 5px 0;
-    }
-
-    .success {
-      color: #4caf50;
-    }
-
-    .failed {
-      color: #ff5252;
-    }
-
-    .lihat-link {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      background: #2196f3;
+    th, td {
+      padding: 12px;
+      text-align: left;
       color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .popup {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #27ae60;
+      color: white;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .popup.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    a.surat-link {
+      background: #fff;
+      color: #000;
       text-decoration: none;
+      padding: 8px 12px;
       border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    a.surat-link:hover {
+      background: #f1c40f;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.4em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="verifikasi-container">
-    <h2>Verifikasi Nomor Surat</h2>
-    <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat...">
+  <div class="container">
+    <h1>Verifikasi Nomor Surat</h1>
+    <input type="text" id="nomorSurat" placeholder="Masukkan nomor surat..."/>
     <button onclick="verifikasiSurat()">Verifikasi</button>
-
-    <div class="result" id="hasilVerifikasi"></div>
+    <div id="popup" class="popup"></div>
+    <div id="hasil" style="margin-top: 20px;"></div>
   </div>
 
   <script>
-    // Simulasi database surat
-    const databaseSurat = {
-      "001/SM/24A-ST/2024": {
+    const dataSurat = [
+      {
+        nomor: "123/ABC/24A-BC/2024",
         perihal: "Undangan Rapat",
-        tanggal: "20 Juli 2024",
-        ditandatangani: "Syadad Nabil",
-        status: "Terverifikasi ✅",
-        file: "surat1.jpg"
+        tanggal: "2024-05-12",
+        ditandatangani: "Drs. H. Ahmad Nawawi, M.Pd",
+        status: "Terverifikasi",
+        link: "surat1.jpg"
       },
-      "002/SM/24A-ST/2024": {
-        perihal: "Pemberitahuan Acara",
-        tanggal: "21 Juli 2024",
-        ditandatangani: "Dewi Lestari",
-        status: "Terverifikasi ✅",
-        file: "surat2.jpg"
+      {
+        nomor: "456/DEF/24B-CD/2025",
+        perihal: "Pemberitahuan Libur",
+        tanggal: "2025-01-18",
+        ditandatangani: "Hj. Siti Komariah, S.Ag",
+        status: "Terverifikasi",
+        link: "surat2.jpg"
       }
-    };
+    ];
 
     function verifikasiSurat() {
-      const input = document.getElementById("nomorSurat").value.trim();
-      const hasil = document.getElementById("hasilVerifikasi");
+      const input = document.getElementById('nomorSurat').value.trim();
+      const hasil = document.getElementById('hasil');
+      const popup = document.getElementById('popup');
+      hasil.innerHTML = '';
+      popup.classList.remove('show');
 
-      if (databaseSurat[input]) {
-        const surat = databaseSurat[input];
+      const surat = dataSurat.find(s => s.nomor === input);
+      if (surat) {
+        popup.textContent = "✅ Surat berhasil diverifikasi.";
+        popup.style.backgroundColor = "#27ae60";
+        popup.classList.add('show');
+
         hasil.innerHTML = `
-          <p><strong>Nomor Surat:</strong> ${input}</p>
-          <p><strong>Perihal:</strong> ${surat.perihal}</p>
-          <p><strong>Tanggal:</strong> ${surat.tanggal}</p>
-          <p><strong>Ditandatangani oleh:</strong> ${surat.ditandatangani}</p>
-          <p class="success"><strong>Status:</strong> ${surat.status}</p>
-          <a class="lihat-link" href="${surat.file}" target="_blank">📄 Lihat Surat</a>
+          <table>
+            <tr><th>Nomor Surat</th><td>${surat.nomor}</td></tr>
+            <tr><th>Perihal</th><td>${surat.perihal}</td></tr>
+            <tr><th>Tanggal</th><td>${surat.tanggal}</td></tr>
+            <tr><th>Ditandatangani Oleh</th><td>${surat.ditandatangani}</td></tr>
+            <tr><th>Status</th><td>${surat.status}</td></tr>
+            <tr><th>Lihat Surat</th><td><a class="surat-link" href="${surat.link}" target="_blank">Lihat Surat 📄</a></td></tr>
+          </table>
         `;
       } else {
-        hasil.innerHTML = `
-          <p class="failed">Nomor surat <strong>${input}</strong> tidak ditemukan atau belum diverifikasi.</p>
-        `;
+        popup.textContent = "❌ Nomor surat tidak ditemukan.";
+        popup.style.backgroundColor = "#c0392b";
+        popup.classList.add('show');
       }
-
-      hasil.style.display = "block";
     }
   </script>
 </body>
