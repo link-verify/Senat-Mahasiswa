@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Profil Senat Mahasiswa</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
-      padding-top: 90px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
+      padding-top: 80px;
     }
 
     .nav {
@@ -18,20 +18,19 @@
       left: 50%;
       transform: translateX(-50%);
       background: white;
-      border-radius: 40px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-radius: 50px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       display: flex;
       gap: 1rem;
-      padding: 10px 30px;
+      padding: 12px 30px;
       z-index: 1000;
-      animation: fadeInDown 0.8s ease;
     }
 
     .nav a {
       text-decoration: none;
       color: #1976d2;
       font-weight: 600;
-      padding: 8px 18px;
+      padding: 8px 15px;
       border-radius: 30px;
       transition: background 0.3s;
     }
@@ -46,13 +45,19 @@
       padding: 2rem;
       background: #fff;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      animation: fadeInUp 1s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
     }
 
-    h1, h2 {
-      color: #0d47a1;
+    h1 {
       text-align: center;
+      color: #0d47a1;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      color: #1565c0;
+      margin-top: 1.5rem;
     }
 
     p, li {
@@ -66,100 +71,83 @@
     }
 
     .struktur {
-      margin-top: 1.5rem;
-      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
       background: #e3f2fd;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .struktur p {
-      margin: 6px 0;
+    .struktur strong {
+      color: #0d47a1;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
     @media (max-width: 600px) {
+      .container {
+        padding: 1.2rem;
+      }
+
       .nav {
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.5rem;
         padding: 10px 15px;
       }
-
-      .container {
-        padding: 1.2rem;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- MENU -->
+  <!-- Menu Navigasi -->
   <nav class="nav">
     <a href="index.html">Beranda</a>
     <a href="aspirasi.html">Aspirasi</a>
-    <a href="verifikasi.html">Verifikasi</a>
+    <a href="verifikasi.html">Verifikasi Surat</a>
     <a href="agenda.html">Agenda</a>
     <a href="profil.html">Profil</a>
   </nav>
 
-  <!-- PROFIL -->
+  <!-- Isi Profil -->
   <div class="container">
-    <h1>Profil Senat Mahasiswa STITNU Al-Farabi</h1>
+    <h1>Profil Senat Mahasiswa</h1>
 
     <h2>Tentang Kami</h2>
     <p>
-      Senat Mahasiswa (SEMA) STITNU Al-Farabi Pangandaran adalah lembaga legislatif mahasiswa
-      yang berperan dalam menyalurkan aspirasi, mengawasi jalannya kegiatan kemahasiswaan, serta
-      memperkuat karakter dan kepemimpinan mahasiswa.
+      Senat Mahasiswa STITNU Al-Farabi Pangandaran merupakan lembaga legislatif mahasiswa
+      yang berperan dalam mengawasi, menyuarakan aspirasi, serta mengawal arah kebijakan kampus
+      dalam bingkai demokrasi dan intelektual. Senat Mahasiswa dibentuk sebagai wadah utama
+      mahasiswa dalam menyalurkan ide, gagasan, serta kritik-konstruktif terhadap kebijakan kampus.
     </p>
 
     <h2>Visi</h2>
     <p>
-      Menjadikan SEMA sebagai wadah aspiratif dan partisipatif dalam membangun tata kelola organisasi kemahasiswaan yang transparan dan berintegritas.
+      Menjadikan Senat Mahasiswa sebagai lembaga yang responsif, solutif, dan representatif
+      terhadap kebutuhan serta aspirasi mahasiswa, guna menciptakan iklim akademik yang partisipatif dan bermartabat.
     </p>
 
     <h2>Misi</h2>
     <ul>
       <li>Mengembangkan budaya organisasi yang demokratis, jujur, dan profesional.</li>
-      <li>Mendorong transparansi dan pengawasan terhadap program kemahasiswaan.</li>
-      <li>Mewujudkan ruang aspirasi yang komunikatif dan solutif.</li>
-      <li>Membangun solidaritas antarorganisasi dan seluruh civitas kampus.</li>
+      <li>Menjadi wadah strategis aspirasi mahasiswa dengan prinsip transparansi dan akuntabilitas.</li>
+      <li>Mendorong sinergi antarorganisasi mahasiswa dan lembaga kampus.</li>
+      <li>Melaksanakan pengawasan terhadap program kerja ormawa dan birokrasi kampus.</li>
     </ul>
 
-    <h2>Struktur Organisasi 2025–2026</h2>
+    <h2>Struktur Organisasi</h2>
     <div class="struktur">
-      <p><strong>Ketua:</strong> Syaddad Nabil Mudzafar</p>
-      <p><strong>Sekretaris:</strong> Ai Siska Silvia</p>
-      <p><strong>Bendahara:</strong> Halimatussa’diah</p>
-      <br/>
-      <p><strong>Komisi 1 - Hukum & Legislasi:</strong></p>
-      <ul>
-        <li>Siti Khoeriyah</li>
-        <li>Dede Yusuf Z</li>
-      </ul>
-      <p><strong>Komisi 2 - Auditing & Budgeting:</strong></p>
-      <ul>
-        <li>Fajar Saripudin</li>
-        <li>Nelis Sopariah</li>
-        <li>Halimatussa’diah</li>
-      </ul>
-      <p><strong>Komisi 3 - Aspirasi & Kebijakan Publik:</strong></p>
-      <ul>
-        <li>Widayanti</li>
-        <li>Asri Sawalianti</li>
-        <li>Rahma Ramadani</li>
-      </ul>
+      <p><strong>Ketua Senat:</strong> Syadad Nabil Mudzafar</p>
+      <p><strong>Wakil Ketua:</strong> Naufal Rizqi</p>
+      <p><strong>Sekretaris:</strong> Intan Nurhidayah</p>
+      <p><strong>Bendahara:</strong> Ahmad Fauzan</p>
+      <p><strong>Komisi A (Legislasi & Aspirasi):</strong> Rina Kurnia</p>
+      <p><strong>Komisi B (Pengawasan & Evaluasi):</strong> Dede Hidayat</p>
+      <p><strong>Komisi C (Akademik & Kaderisasi):</strong> Farhan Yusuf</p>
     </div>
   </div>
+
 </body>
 </html>
