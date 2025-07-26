@@ -5,193 +5,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verifikasi Surat</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
-      color: #222;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e6f0ff, #ffffff);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
       min-height: 100vh;
     }
 
     .container {
-      background-color: #fff;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      border-radius: 16px;
-      padding: 2rem;
-      width: 100%;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 90%;
       max-width: 500px;
-      transition: 0.4s ease;
+      transition: all 0.4s ease-in-out;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 1.5rem;
+      color: #003366;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 0.75rem;
+      padding: 10px;
+      margin: 12px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
-      margin-bottom: 1rem;
-      font-size: 1rem;
     }
 
-    button {
-      display: block;
-      margin: 0 auto;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: white;
+    .verify-btn {
+      background: linear-gradient(to right, #007bff, #0056b3);
+      color: #fff;
       border: none;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
+      padding: 10px 20px;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
-      transition: background 0.3s ease;
+      width: 100%;
+      transition: transform 0.2s ease-in-out;
     }
 
-    button:hover {
-      background: linear-gradient(to right, #0072ff, #00c6ff);
+    .verify-btn:hover {
+      transform: scale(1.03);
     }
 
     .result {
-      margin-top: 2rem;
       display: none;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .result table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .result td {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .label {
-      font-weight: bold;
-      color: #0072ff;
-    }
-
-    .popup {
-      animation: popup 0.3s ease-out;
-    }
-
-    .whatsapp-button {
-      display: block;
-      margin: 1.5rem auto 0;
-      text-align: center;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      padding: 0.7rem 1.5rem;
+      margin-top: 20px;
+      background: #f0f8ff;
+      border-left: 4px solid #007bff;
+      padding: 15px;
       border-radius: 8px;
+      position: relative;
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .info-item {
+      margin-bottom: 10px;
+    }
+
+    .info-label {
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-      transition: background 0.3s ease;
+      color: #003366;
     }
 
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
+    .info-value {
+      color: #333;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .lihat-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 14px;
+      background: #28a745;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
     }
 
-    @keyframes popup {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    .whatsapp-btn {
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      background: linear-gradient(to right, #25D366, #128C7E);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 1.5rem;
+      h2 {
+        font-size: 1.5rem;
       }
 
-      button, .whatsapp-button {
-        width: 100%;
+      .verify-btn, .whatsapp-btn {
+        font-size: 1rem;
+      }
+
+      .container {
+        padding: 15px;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-   <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-  <h2>Verifikasi Surat</h2>
-  <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" />
-  <button onclick="verifikasiSurat()">Verifikasi</button>
+  <div class="container">
+    <h2>Verifikasi Surat</h2>
+    <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat">
+    <button class="verify-btn" onclick="verifikasiSurat()">Verifikasi</button>
 
-  <div class="result popup" id="hasilVerifikasi">
-    <table>
-      <tr>
-        <td class="label">Nomor Surat</td>
-        <td id="vNomorSurat"></td>
-      </tr>
-      <tr>
-        <td class="label">Perihal</td>
-        <td id="vPerihal"></td>
-      </tr>
-      <tr>
-        <td class="label">Tanggal</td>
-        <td id="vTanggal"></td>
-      </tr>
-      <tr>
-        <td class="label">Ditandatangani oleh</td>
-        <td id="vTTD"></td>
-      </tr>
-      <tr>
-        <td class="label">Status</td>
-        <td id="vStatus"></td>
-      </tr>
-      <tr>
-        <td class="label">Lihat Surat</td>
-        <td><a id="vLinkSurat" href="#" target="_blank">Lihat Gambar</a></td>
-      </tr>
-    </table>
-    <a class="whatsapp-button" href="https://wa.me/6281234567890" target="_blank">Info Lebih Lanjut</a>
+    <div id="hasilVerifikasi" class="result">
+      <div class="info-item"><span class="info-label">Nomor Surat:</span> <span class="info-value" id="nomorSuratHasil"></span></div>
+      <div class="info-item"><span class="info-label">Perihal:</span> <span class="info-value" id="perihalSurat"></span></div>
+      <div class="info-item"><span class="info-label">Tanggal:</span> <span class="info-value" id="tanggalSurat"></span></div>
+      <div class="info-item"><span class="info-label">Ditandatangani Oleh:</span> <span class="info-value" id="ttdSurat"></span></div>
+      <div class="info-item"><span class="info-label">Status:</span> <span class="info-value" id="statusSurat"></span></div>
+      <a id="lihatSurat" class="lihat-btn" href="#" target="_blank">Lihat Surat</a>
+    </div>
+
+    <a class="whatsapp-btn" href="https://wa.me/6281234567890" target="_blank">Hubungi Info Lebih Lanjut</a>
   </div>
-</div>
 
-<script>
-  function verifikasiSurat() {
-    const input = document.getElementById("nomorSurat").value.trim();
-
-    // Contoh data
+  <script>
     const dataSurat = {
-      "001/SM/STI/07A-BK/2025": {
-        nomor: "001/SM/STI/07A-BK/2025",
-        perihal: "Undangan Rapat Koordinasi",
-        tanggal: "20 Juli 2025",
-        ttd: "Ketua Senat Mahasiswa",
+      "123/SMT/25A-BK/2024": {
+        perihal: "Undangan Rapat Senat",
+        tanggal: "2024-07-15",
+        ttd: "Syadad Nabil Mudzafar",
         status: "Terverifikasi",
-        link: "https://example.com/surat1.jpg"
+        file: "https://example.com/surat-undangan.jpg"
+      },
+      "456/SMT/25A-BK/2024": {
+        perihal: "Pengumuman Pelantikan",
+        tanggal: "2024-08-01",
+        ttd: "Hoerudin",
+        status: "Terverifikasi",
+        file: "https://example.com/surat-pelantikan.jpg"
       }
     };
 
-    if (dataSurat[input]) {
-      const surat = dataSurat[input];
-      document.getElementById("vNomorSurat").textContent = surat.nomor;
-      document.getElementById("vPerihal").textContent = surat.perihal;
-      document.getElementById("vTanggal").textContent = surat.tanggal;
-      document.getElementById("vTTD").textContent = surat.ttd;
-      document.getElementById("vStatus").textContent = surat.status;
-      document.getElementById("vLinkSurat").href = surat.link;
-      document.getElementById("hasilVerifikasi").style.display = "block";
-    } else {
-      alert("Nomor surat tidak ditemukan.");
+    function verifikasiSurat() {
+      const input = document.getElementById("nomorSurat").value.trim();
+      const hasil = document.getElementById("hasilVerifikasi");
+
+      if (dataSurat[input]) {
+        document.getElementById("nomorSuratHasil").textContent = input;
+        document.getElementById("perihalSurat").textContent = dataSurat[input].perihal;
+        document.getElementById("tanggalSurat").textContent = dataSurat[input].tanggal;
+        document.getElementById("ttdSurat").textContent = dataSurat[input].ttd;
+        document.getElementById("statusSurat").textContent = dataSurat[input].status;
+        document.getElementById("lihatSurat").href = dataSurat[input].file;
+        hasil.style.display = "block";
+      } else {
+        hasil.innerHTML = "<strong style='color: red;'>Nomor surat tidak ditemukan.</strong>";
+        hasil.style.display = "block";
+      }
     }
-  }
-</script>
+  </script>
 
 </body>
 </html>
