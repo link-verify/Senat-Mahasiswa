@@ -11,223 +11,205 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff;
-      color: #000;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+      color: #fff;
       transition: all 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 1rem;
     }
 
-    @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: light) {
       body {
-        background-color: #121212;
-        color: #fff;
+        background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+        color: #000;
+      }
+
+      .container {
+        background: #ffffff;
+        color: #000;
       }
 
       table {
-        background-color: #1e1e1e;
-        color: #fff;
-      }
-
-      th, td {
-        color: #fff;
+        background-color: #fafafa;
+        color: #000;
       }
 
       input, button {
-        background-color: #2c2c2c;
-        color: #fff;
-        border: 1px solid #444;
+        background-color: #eaeaea;
+        color: #000;
       }
     }
 
     .container {
-      max-width: 600px;
-      width: 100%;
-      padding: 1.5rem;
-      background-color: inherit;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
-    h2 {
+    h1 {
       text-align: center;
+      margin-bottom: 2rem;
     }
 
     form {
-      text-align: center;
-      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
 
-    input[type="text"] {
+    input {
       padding: 10px;
-      width: 80%;
-      max-width: 400px;
+      width: 100%;
+      max-width: 500px;
       border-radius: 6px;
-      margin-bottom: 10px;
+      border: none;
     }
 
     button {
       padding: 10px 20px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      background-color: #007bff;
+      background: #4CAF50;
       color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background: #45a049;
     }
 
     table {
       width: 100%;
+      margin-top: 2rem;
       border-collapse: collapse;
-      margin-top: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     th, td {
       padding: 12px;
-      border: 1px solid rgba(200, 200, 200, 0.2);
-      text-align: center;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .popup {
-      background-color: rgba(0, 0, 0, 0.7);
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      display: none;
-      justify-content: center;
-      align-items: center;
+      top: 20px;
+      right: 20px;
+      background: #4caf50;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+      z-index: 1000;
     }
 
-    .popup-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      color: #000;
-      max-width: 90%;
+    .popup.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .popup.active {
-      display: flex;
-    }
-
-    .lihat-surat-btn {
-      padding: 6px 12px;
-      background-color: green;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    @media (max-width: 600px) {
-      input[type="text"] {
-        width: 100%;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      table th, table td {
+    @media screen and (max-width: 600px) {
+      th, td {
         font-size: 14px;
-        padding: 8px;
+      }
+
+      input {
+        width: 90%;
       }
     }
   </style>
 </head>
 <body>
+  <div class="popup" id="popup">Surat berhasil diverifikasi!</div>
+
   <div class="container">
-    <h2>Verifikasi Surat</h2>
-    <form id="verifikasiForm">
-      <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat" required />
-      <br />
+    <h1>Verifikasi Surat</h1>
+    <form id="verifyForm">
+      <input type="text" id="noSurat" placeholder="Masukkan Nomor Surat" required />
       <button type="submit">Verifikasi</button>
     </form>
 
-    <div id="hasilVerifikasi"></div>
-  </div>
-
-  <!-- Popup -->
-  <div class="popup" id="popup">
-    <div class="popup-content" id="popupContent"></div>
+    <table id="resultTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Nomor Surat</th>
+          <th>Perihal</th>
+          <th>Tanggal</th>
+          <th>Ditandatangani Oleh</th>
+          <th>Status</th>
+          <th>Lihat Surat</th>
+        </tr>
+      </thead>
+      <tbody id="resultBody"></tbody>
+    </table>
   </div>
 
   <script>
     const dataSurat = [
       {
-        nomor: "001/SM/07/2025",
-        perihal: "Undangan Rapat Senat",
-        tanggal: "2025-07-22",
-        status: "Terverifikasi",
-        file: "https://via.placeholder.com/400x300?text=Surat+001"
+        no: '001/SM/STITNU/2025',
+        perihal: 'Undangan Rapat',
+        tanggal: '20 Juli 2025',
+        oleh: 'Ketua Senat Mahasiswa',
+        status: 'Terverifikasi',
+        file: 'surat1.jpg'
       },
       {
-        nomor: "002/SM/07/2025",
-        perihal: "Pengajuan Proposal",
-        tanggal: "2025-07-20",
-        status: "Belum Terverifikasi",
-        file: "https://via.placeholder.com/400x300?text=Surat+002"
+        no: '002/SM/STITNU/2025',
+        perihal: 'Pemberitahuan Acara',
+        tanggal: '22 Juli 2025',
+        oleh: 'Sekretaris Senat',
+        status: 'Terverifikasi',
+        file: 'surat2.jpg'
       }
     ];
 
-    document.getElementById("verifikasiForm").addEventListener("submit", function (e) {
+    const form = document.getElementById('verifyForm');
+    const popup = document.getElementById('popup');
+    const table = document.getElementById('resultTable');
+    const body = document.getElementById('resultBody');
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const inputNomor = document.getElementById("nomorSurat").value.trim();
-      const hasil = document.getElementById("hasilVerifikasi");
-      const surat = dataSurat.find(s => s.nomor === inputNomor);
+      const input = document.getElementById('noSurat').value.trim();
+      const found = dataSurat.find(surat => surat.no === input);
 
-      if (!surat) {
-        hasil.innerHTML = `<p style="color:red;">Nomor surat tidak ditemukan.</p>`;
-        return;
+      if (found) {
+        popup.textContent = 'Surat berhasil diverifikasi!';
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 3000);
+
+        body.innerHTML = `
+          <tr>
+            <td>${found.no}</td>
+            <td>${found.perihal}</td>
+            <td>${found.tanggal}</td>
+            <td>${found.oleh}</td>
+            <td>${found.status}</td>
+            <td><a href="${found.file}" target="_blank">Lihat Surat</a></td>
+          </tr>
+        `;
+        table.style.display = 'table';
+      } else {
+        popup.textContent = 'Nomor surat tidak ditemukan.';
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 3000);
+        table.style.display = 'none';
       }
-
-      hasil.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Nomor Surat</th>
-              <th>Perihal</th>
-              <th>Tanggal Ditandatangani</th>
-              <th>Status</th>
-              <th>Lihat Surat</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onclick="showPopup('${surat.perihal}', '${surat.tanggal}', '${surat.status}')">
-              <td>${surat.nomor}</td>
-              <td>${surat.perihal}</td>
-              <td>${surat.tanggal}</td>
-              <td>${surat.status}</td>
-              <td><a href="${surat.file}" target="_blank" class="lihat-surat-btn">Lihat</a></td>
-            </tr>
-          </tbody>
-        </table>
-      `;
     });
-
-    function showPopup(perihal, tanggal, status) {
-      const popup = document.getElementById("popup");
-      const content = document.getElementById("popupContent");
-      content.innerHTML = `
-        <h3>Detail Surat</h3>
-        <p><strong>Perihal:</strong> ${perihal}</p>
-        <p><strong>Tanggal:</strong> ${tanggal}</p>
-        <p><strong>Status:</strong> ${status}</p>
-        <button onclick="closePopup()">Tutup</button>
-      `;
-      popup.classList.add("active");
-    }
-
-    function closePopup() {
-      document.getElementById("popup").classList.remove("active");
-    }
   </script>
 </body>
 </html>
