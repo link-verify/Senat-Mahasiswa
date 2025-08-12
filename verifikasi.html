@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verifikasi Naskah</title>
+<title>Hasil Verifikasi Naskah</title>
 <style>
   :root {
     --accent: #ff4d6d;
@@ -19,7 +19,6 @@
     align-items: center;
     padding: 20px;
     min-height: 100vh;
-    justify-content: flex-start;
   }
   header {
     text-align: center;
@@ -33,29 +32,6 @@
   h1 {
     font-size: 18px;
     margin: 8px 0 0;
-  }
-  .search-area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  input {
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    min-width: 250px;
-  }
-  button {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
   }
   table {
     border-collapse: collapse;
@@ -75,85 +51,35 @@
   th {
     background: #f0f4ff;
     font-weight: bold;
+    width: 35%;
   }
-  .not-found {
-    color: red;
-    font-weight: bold;
+  .status {
     margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
   }
+  .status.ok { color: green; }
+  .status.fail { color: red; }
 </style>
 </head>
 <body>
 
 <header>
   <img src="logo.png" alt="Logo">
-  <h1>Verifikasi Nomor Surat</h1>
+  <h1>Hasil Verifikasi Nomor Surat</h1>
 </header>
 
-<div class="search-area">
-  <input type="text" id="nomorInput" placeholder="Masukkan nomor surat...">
-  <button id="verifyBtn">VERIFIKASI</button>
-</div>
+<div class="status ok">Status: TERVERIFIKASI ✅</div>
 
-<div id="resultArea"></div>
-
-<script>
-const records = {
-  "SRT-2025-001/PANG": {
-    hash: "58620ffe3b6ff08c0f57d337fda6b635",
-    nama: "Dr. H. KUSDJANA, MM.",
-    jabatan: "Sekretaris Daerah Kabupaten Pangandaran",
-    unit: "SEKRETARIAT DAERAH KABUPATEN PANGANDARAN",
-    instansi: "Pemerintah Kabupaten Pangandaran",
-    tanggal: "Jumat, 8 Agustus 2025 pukul 11:54"
-  },
-  "SRT-2025-002/PANG": {
-    hash: "2d7c89a1b8c33a1234f6b9d801aa7c2f",
-    nama: "Drs. Ahmad Subekti",
-    jabatan: "Kepala Dinas Pendidikan",
-    unit: "DINAS PENDIDIKAN KAB. PANGANDARAN",
-    instansi: "Pemerintah Kabupaten Pangandaran",
-    tanggal: "Senin, 11 Agustus 2025 pukul 09:10"
-  }
-};
-
-function normalize(s) {
-  return s ? s.trim().toUpperCase() : "";
-}
-
-document.getElementById("verifyBtn").addEventListener("click", function() {
-  const key = normalize(document.getElementById("nomorInput").value);
-  const resultArea = document.getElementById("resultArea");
-
-  if (!key) {
-    resultArea.innerHTML = `<p class="not-found">Masukkan nomor surat terlebih dahulu.</p>`;
-    return;
-  }
-
-  if (records[key]) {
-    const r = records[key];
-    resultArea.innerHTML = `
-      <table>
-        <tr><th>Nomor Surat</th><td>${key}</td></tr>
-        <tr><th>Nilai Hash</th><td>${r.hash}</td></tr>
-        <tr><th>Nama</th><td>${r.nama}</td></tr>
-        <tr><th>Jabatan</th><td>${r.jabatan}</td></tr>
-        <tr><th>Unit Kerja</th><td>${r.unit}</td></tr>
-        <tr><th>Instansi</th><td>${r.instansi}</td></tr>
-        <tr><th>Tanggal</th><td>${r.tanggal}</td></tr>
-      </table>
-    `;
-  } else {
-    resultArea.innerHTML = `<p class="not-found">Nomor surat tidak ditemukan atau tidak valid.</p>`;
-  }
-});
-
-document.getElementById("nomorInput").addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    document.getElementById("verifyBtn").click();
-  }
-});
-</script>
+<table>
+  <tr><th>Nomor Surat</th><td>SRT-2025-001/PANG</td></tr>
+  <tr><th>Nilai Hash</th><td>58620ffe3b6ff08c0f57d337fda6b635</td></tr>
+  <tr><th>Nama</th><td>Dr. H. KUSDJANA, MM.</td></tr>
+  <tr><th>Jabatan</th><td>Sekretaris Daerah Kabupaten Pangandaran</td></tr>
+  <tr><th>Unit Kerja</th><td>SEKRETARIAT DAERAH KABUPATEN PANGANDARAN</td></tr>
+  <tr><th>Instansi</th><td>Pemerintah Kabupaten Pangandaran</td></tr>
+  <tr><th>Ditandatangani pada</th><td>Jumat, 8 Agustus 2025 pukul 11:54</td></tr>
+</table>
 
 </body>
 </html>
