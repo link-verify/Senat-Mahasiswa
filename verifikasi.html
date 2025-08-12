@@ -1,108 +1,101 @@
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Verifikasi Naskah - SRIKANDI</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Verifikasi Naskah</title>
 <style>
-  :root{
-    --accent:#ff4d6d;
-    --muted:#6b7280;
-    --card-bg:#ffffff;
-    --page-bg:#f6f9ff;
-    --shadow: 0 10px 30px rgba(15,23,42,0.07);
-    --maxw:480px;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  :root {
+    --accent: #ff4d6d;
+    --muted: #6b7280;
+    --bg: #f6f9ff;
+    font-family: Arial, sans-serif;
   }
-  html,body{height:100%;}
-  body{
-    margin:0;
-    background: linear-gradient(180deg,#0b63ff 0%, #2f7dff 6%, var(--page-bg) 6%);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:28px 12px;
-    box-sizing:border-box;
+  body {
+    margin: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    justify-content: flex-start;
   }
-  .wrap{
-    width:100%;
-    max-width:var(--maxw);
-    background:var(--card-bg);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    position:relative;
+  header {
+    text-align: center;
+    margin-bottom: 20px;
   }
-  header{
-    background:linear-gradient(90deg, #2b7cff, #6aa8ff);
-    padding:18px;
-    color:white;
-    text-align:center;
+  header img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
   }
-  .coat{
-    width:62px;height:62px;
-    background:linear-gradient(#ffd27a,#ffb34d);
-    border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:#7a4200;
-    margin:auto;margin-bottom:6px;
+  h1 {
+    font-size: 18px;
+    margin: 8px 0 0;
   }
-  h1{margin:0;font-size:18px;letter-spacing:1px;}
-  p.subtitle{margin:4px 0 0;font-size:11px;}
-  .content{padding:22px;}
-  .search-area{display:flex;gap:8px;margin-bottom:16px;}
-  input[type="text"]{
-    flex:1;padding:12px 14px;border-radius:8px;
-    border:1px solid #e6e9f0;font-size:14px;
+  .search-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
   }
-  button.verify{
-    background:var(--accent);color:white;border:none;
-    padding:0 14px;border-radius:8px;min-width:120px;
-    font-weight:600;cursor:pointer;
+  input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 250px;
   }
-  .muted{color:var(--muted); font-size:13px}
-  .center-screen{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:100%;
-    padding:20px;
-    text-align:center;
-    animation:popup 0.6s ease forwards;
+  button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
   }
-  .hash{font-family:monospace;color:#b91c1c;word-break:break-all}
-  .btn-download{
-    margin-top:20px;
-    padding:10px 14px;
-    border-radius:10px;
-    background:#ff6b6b;
-    color:white;font-weight:700;
-    border:none;cursor:pointer;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  @keyframes popup{
-    0%{opacity:0;transform:scale(0.8) translateY(20px);}
-    100%{opacity:1;transform:scale(1) translateY(0);}
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+  th {
+    background: #f0f4ff;
+    font-weight: bold;
+  }
+  .not-found {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
   }
 </style>
 </head>
 <body>
-<div class="wrap" role="main">
-  <div id="initialView">
-    <header>
-      <div class="coat">GARUDA</div>
-      <h1>SRIKANDI</h1>
-      <p class="subtitle">Sistem Informasi Kearsipan Dinamis Terintegrasi</p>
-    </header>
-    <main class="content">
-      <p class="muted">Masukkan <strong>Nomor Surat</strong> untuk memverifikasi naskah dinas.</p>
-      <div class="search-area">
-        <input id="nomorInput" type="text" placeholder="Contoh: SRT-2025-001/PANG">
-        <button class="verify" id="verifyBtn">VERIFIKASI</button>
-      </div>
-    </main>
-  </div>
-  <div id="resultView" style="display:none;"></div>
+
+<header>
+  <img src="logo.png" alt="Logo">
+  <h1>Verifikasi Nomor Surat</h1>
+</header>
+
+<div class="search-area">
+  <input type="text" id="nomorInput" placeholder="Masukkan nomor surat...">
+  <button id="verifyBtn">VERIFIKASI</button>
 </div>
+
+<div id="resultArea"></div>
 
 <script>
 const records = {
@@ -113,42 +106,54 @@ const records = {
     unit: "SEKRETARIAT DAERAH KABUPATEN PANGANDARAN",
     instansi: "Pemerintah Kabupaten Pangandaran",
     tanggal: "Jumat, 8 Agustus 2025 pukul 11:54"
+  },
+  "SRT-2025-002/PANG": {
+    hash: "2d7c89a1b8c33a1234f6b9d801aa7c2f",
+    nama: "Drs. Ahmad Subekti",
+    jabatan: "Kepala Dinas Pendidikan",
+    unit: "DINAS PENDIDIKAN KAB. PANGANDARAN",
+    instansi: "Pemerintah Kabupaten Pangandaran",
+    tanggal: "Senin, 11 Agustus 2025 pukul 09:10"
   }
 };
-function normalize(s){return s ? s.trim().toUpperCase() : "";}
-const btn = document.getElementById('verifyBtn');
-const input = document.getElementById('nomorInput');
-const initialView = document.getElementById('initialView');
-const resultView = document.getElementById('resultView');
 
-btn.addEventListener('click', ()=>{
-  const key = normalize(input.value);
-  if(!key){alert("Masukkan nomor surat.");return;}
-  initialView.style.display = 'none';
-  resultView.style.display = 'flex';
-  const rec = records[key];
-  if(rec){
-    resultView.innerHTML = `
-      <div class="center-screen">
-        <h2 style="color:green">✅ TERVERIFIKASI</h2>
-        <p>Nilai Hash : <span class="hash">${rec.hash}</span></p>
-        <p><strong>Nama:</strong> ${rec.nama}</p>
-        <p><strong>Jabatan:</strong> ${rec.jabatan}</p>
-        <p><strong>Unit Kerja:</strong> ${rec.unit}</p>
-        <p><strong>Instansi:</strong> ${rec.instansi}</p>
-        <p><strong>Ditandatangani pada:</strong> ${rec.tanggal}</p>
-        <button class="btn-download">📄 TUTUP FILE DIGITAL (PDF)</button>
-      </div>
+function normalize(s) {
+  return s ? s.trim().toUpperCase() : "";
+}
+
+document.getElementById("verifyBtn").addEventListener("click", function() {
+  const key = normalize(document.getElementById("nomorInput").value);
+  const resultArea = document.getElementById("resultArea");
+
+  if (!key) {
+    resultArea.innerHTML = `<p class="not-found">Masukkan nomor surat terlebih dahulu.</p>`;
+    return;
+  }
+
+  if (records[key]) {
+    const r = records[key];
+    resultArea.innerHTML = `
+      <table>
+        <tr><th>Nomor Surat</th><td>${key}</td></tr>
+        <tr><th>Nilai Hash</th><td>${r.hash}</td></tr>
+        <tr><th>Nama</th><td>${r.nama}</td></tr>
+        <tr><th>Jabatan</th><td>${r.jabatan}</td></tr>
+        <tr><th>Unit Kerja</th><td>${r.unit}</td></tr>
+        <tr><th>Instansi</th><td>${r.instansi}</td></tr>
+        <tr><th>Tanggal</th><td>${r.tanggal}</td></tr>
+      </table>
     `;
   } else {
-    resultView.innerHTML = `
-      <div class="center-screen">
-        <h2 style="color:red">❌ TIDAK DITEMUKAN</h2>
-        <p>Nomor surat tidak ditemukan atau tidak valid.</p>
-      </div>
-    `;
+    resultArea.innerHTML = `<p class="not-found">Nomor surat tidak ditemukan atau tidak valid.</p>`;
+  }
+});
+
+document.getElementById("nomorInput").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    document.getElementById("verifyBtn").click();
   }
 });
 </script>
+
 </body>
 </html>
