@@ -1,88 +1,209 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hasil Verifikasi Naskah</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verifikasi TTE Surat</title>
 <style>
-  :root {
-    --accent: #ff4d6d;
-    --muted: #6b7280;
-    --bg: #f6f9ff;
-    font-family: Arial, sans-serif;
-  }
-  body {
-    margin: 0;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    min-height: 100vh;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  header img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-  }
-  h1 {
-    font-size: 18px;
-    margin: 8px 0 0;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 500px;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  }
-  th, td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-  }
-  th {
-    background: #f0f4ff;
-    font-weight: bold;
-    width: 35%;
-  }
-  .status {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .status.ok { color: green; }
-  .status.fail { color: red; }
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #87ceeb, #ffffff); /* Biru langit ke putih */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        max-width: 650px;
+        width: 100%;
+        text-align: center;
+        animation: shadowPulse 3s infinite ease-in-out;
+    }
+    @keyframes shadowPulse {
+        0%, 100% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        50% { box-shadow: 0 15px 30px rgba(0,0,0,0.35); }
+    }
+    .logo {
+        width: 200px; /* Lebih besar */
+        height: auto;
+        margin-bottom: 8px;
+    }
+    h2 {
+        margin-bottom: 25px;
+        color: #333;
+        font-size: 28px;
+    }
+    input {
+        width: 90%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 18px;
+    }
+    button {
+        padding: 14px 28px;
+        border: none;
+        background: linear-gradient(90deg, #87ceeb, #4682b4);
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .result {
+        margin-top: 25px;
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+    table, th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background: #f0f0f0;
+        width: 40%;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .btn-secondary {
+        background: #1e90ff;
+    }
+    .btn-wa {
+        background: #25d366;
+    }
+    footer {
+        margin-top: 100px;
+        color: grey;
+        font-size: 15px;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+    @media (max-width: 480px) {
+        .container {
+            padding: 25px;
+        }
+        input, button {
+            font-size: 15px;
+        }
+        table {
+            font-size: 14px;
+        }
+        .logo {
+            width: 200px;
+        }
+    }
 </style>
 </head>
 <body>
+    <div class="container">
+        <img src="IMG_6051.png" alt="Logo" class="logo">
+            
+        <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat">
+        <button onclick="verifikasi()">Verifikasi</button>
+        <div class="result" id="resultBox">
+            <table>
+                <tr><th>Nomor Surat</th><td id="hasilNomor"></td></tr>
+                <tr><th>Tanggal Surat</th><td id="hasilTanggal"></td></tr>
+                <tr><th>Perihal</th><td id="hasilPerihal"></td></tr>
+                <tr><th>Ditandatangani oleh</th><td id="hasilStatus"></td></tr>
+            </table>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="lihatFile()">📄 Lihat File</button>
+                <button class="btn-wa" onclick="kirimWA()">💬 WhatsApp</button>
+            </div>
+        </div>
+    </div>
 
-<header>
-  <img src="logo.png" alt="Logo">
-  <h1>Hasil Verifikasi Nomor Surat</h1>
-</header>
+<script>
+    const dataSurat = {
+        "001/DS/2025": {
+            tanggal: "10 Januari 2025",
+            perihal: "Undangan Rapat Desa",
+            penandatangan: "Syadad Nabil Mudzafar",
+            file: "CV-Syadad-Nabil-Mudzafar.pdf"
+        },
+        "002/DS/2025": {
+            tanggal: "15 Januari 2025",
+            perihal: "Pemberitahuan Kegiatan KKN",
+            penandatangan: "Sekretaris Desa Sidomulyo",
+            file: "surat_002.pdf"
+        },
+        "003/DS/2025": {
+            tanggal: "20 Januari 2025",
+            perihal: "Pengumuman Lomba Desa",
+            penandatangan: "Kepala Desa Sidomulyo",
+            file: "surat_003.pdf"
+        }
+    };
 
-<div class="status ok">Status: TERVERIFIKASI ✅</div>
+    let fileUrl = "";
 
-<table>
-  <tr><th>Nomor Surat</th><td>SRT-2025-001/PANG</td></tr>
-  <tr><th>Nilai Hash</th><td>58620ffe3b6ff08c0f57d337fda6b635</td></tr>
-  <tr><th>Nama</th><td>Dr. H. KUSDJANA, MM.</td></tr>
-  <tr><th>Jabatan</th><td>Sekretaris Daerah Kabupaten Pangandaran</td></tr>
-  <tr><th>Unit Kerja</th><td>SEKRETARIAT DAERAH KABUPATEN PANGANDARAN</td></tr>
-  <tr><th>Instansi</th><td>Pemerintah Kabupaten Pangandaran</td></tr>
-  <tr><th>Ditandatangani pada</th><td>Jumat, 8 Agustus 2025 pukul 11:54</td></tr>
-</table>
+    function verifikasi() {
+        const nomor = document.getElementById("nomorSurat").value.trim();
+        const resultBox = document.getElementById("resultBox");
 
+        if (dataSurat[nomor]) {
+            document.getElementById("hasilNomor").innerText = nomor;
+            document.getElementById("hasilTanggal").innerText = dataSurat[nomor].tanggal;
+            document.getElementById("hasilPerihal").innerText = dataSurat[nomor].perihal;
+            document.getElementById("hasilStatus").innerText = dataSurat[nomor].penandatangan;
+            fileUrl = dataSurat[nomor].file;
+            resultBox.style.display = "block";
+        } else {
+            alert("Nomor surat tidak ditemukan.");
+            resultBox.style.display = "none";
+        }
+    }
+
+    function lihatFile() {
+        if (fileUrl) {
+            window.open(fileUrl, "_blank");
+        } else {
+            alert("File tidak tersedia.");
+        }
+    }
+
+    function kirimWA() {
+        const nomor = document.getElementById("nomorSurat").value.trim();
+        if (nomor && dataSurat[nomor]) {
+            const pesan = `Halo, saya ingin menanyakan tentang surat dengan nomor ${nomor} perihal "${dataSurat[nomor].perihal}".`;
+            window.open(`https://wa.me/6285211379911?text=${encodeURIComponent(pesan)}`, "_blank");
+        } else {
+            alert("Nomor surat belum diverifikasi.");
+        }
+    }
+</script>
 </body>
 <footer>
-  © 2025 Arsip Nasional Republik Indonesia · Verifikasi Nomor Surat
-</footer>
+    &copy; 2025 Senat Mahasiswa.<br>
+    diterbitkan oleh Balai Besar Sertifikasi Elektronik (BSrE)<br>
+    Badan Siber dan Sandi Negara (BSSN)
+  </footer>
 </html>
