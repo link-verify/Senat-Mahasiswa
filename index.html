@@ -1,106 +1,210 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beranda Senat Mahasiswa</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verifikasi TTE Surat</title>
+<style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #e3f2fd, #bbdefb);
-      color: #0d47a1;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #87ceeb, #ffffff); /* Biru langit ke putih */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
     }
-
     .container {
-      background: white;
-      padding: 2rem;
-      max-width: 900px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 1s ease;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        max-width: 650px;
+        width: 100%;
+        text-align: center;
+        animation: shadowPulse 3s infinite ease-in-out;
     }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes shadowPulse {
+        0%, 100% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        50% { box-shadow: 0 15px 30px rgba(0,0,0,0.35); }
     }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #0d47a1;
+    .logo {
+        width: 200px; /* Lebih besar */
+        height: auto;
+        margin-bottom: 8px;
     }
-
-    .info {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
+    h2 {
+        margin-bottom: 25px;
+        color: #333;
+        font-size: 28px;
     }
-
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+    input {
+        width: 90%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 18px;
     }
-
-    .btn {
-      background: #2196f3;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    button {
+        padding: 14px 28px;
+        border: none;
+        background: linear-gradient(90deg, #87ceeb, #4682b4);
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .btn:hover {
-      background: #1976d2;
-      transform: scale(1.05);
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 1.2rem;
-      }
-      .info {
-        font-size: 1rem;
-      }
+    .result {
+        margin-top: 25px;
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
     }
-  </style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+    table, th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background: #f0f0f0;
+        width: 40%;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .btn-secondary {
+        background: #1e90ff;
+    }
+    .btn-wa {
+        background: #25d366;
+    }
+    footer {
+        margin-top: 100px;
+        color: grey;
+        font-size: 15px;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+    @media (max-width: 480px) {
+        .container {
+            padding: 25px;
+        }
+        input, button {
+            font-size: 15px;
+        }
+        table {
+            font-size: 14px;
+        }
+        .logo {
+            width: 200px;
+        }
+    }
+</style>
 </head>
 <body>
-  <div class="container">
-     <img src="Gambar WhatsApp 2025-07-14 pukul 01.05.14_658e4143.jpg" alt="Logo Senat Mahasiswa" style="max-width: 120px; display: block; margin: 0 auto 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-    <h1>Selamat Datang di Website Senat Mahasiswa</h1>
-    <p class="info">
-      Website resmi Senat Mahasiswa STITNU Al-Farabi Pangandaran. 
-      Di sini kamu bisa menemukan informasi terkini terkait kegiatan, program kerja, pengumuman, hingga publikasi surat resmi.
-    </p>
-
-    <div class="button-group">
-      <button class="btn" onclick="location.href='verifikasi.html'">Verifikasi Surat</button>
-      <button class="btn" onclick="location.href='agenda.html'">Konsultasi</button>
+    <div class="container">
+        <img src="IMG_6051.png" alt="Logo" class="logo">
+            
+        <input type="text" id="nomorSurat" placeholder="Masukkan Nomor Surat">
+        <button onclick="verifikasi()">Verifikasi</button>
+        <div class="result" id="resultBox">
+            <table>
+                <tr><th>Nomor Surat</th><td id="hasilNomor"></td></tr>
+                <tr><th>Tanggal Surat</th><td id="hasilTanggal"></td></tr>
+                <tr><th>Perihal</th><td id="hasilPerihal"></td></tr>
+                <tr><th>Ditandatangani oleh</th><td id="hasilStatus"></td></tr>
+            </table>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="lihatFile()">📄 Lihat File</button>
+                <button class="btn-wa" onclick="kirimWA()">💬 WhatsApp</button>
+            </div>
+        </div>
     </div>
-  </div>
+
+<script>
+    const dataSurat = {
+        "001/DS/2025": {
+            tanggal: "10 Januari 2025",
+            perihal: "Undangan Rapat Desa",
+            penandatangan: "Syadad Nabil Mudzafar",
+            file: "CV-Syadad-Nabil-Mudzafar.pdf"
+        },
+        "002/DS/2025": {
+            tanggal: "15 Januari 2025",
+            perihal: "Pemberitahuan Kegiatan KKN",
+            penandatangan: "Sekretaris Desa Sidomulyo",
+            file: "surat_002.pdf"
+        },
+        "003/DS/2025": {
+            tanggal: "20 Januari 2025",
+            perihal: "Pengumuman Lomba Desa",
+            penandatangan: "Kepala Desa Sidomulyo",
+            file: "surat_003.pdf"
+        }
+    };
+
+    let fileUrl = "";
+
+    function verifikasi() {
+        const nomor = document.getElementById("nomorSurat").value.trim();
+        const resultBox = document.getElementById("resultBox");
+
+        if (dataSurat[nomor]) {
+            document.getElementById("hasilNomor").innerText = nomor;
+            document.getElementById("hasilTanggal").innerText = dataSurat[nomor].tanggal;
+            document.getElementById("hasilPerihal").innerText = dataSurat[nomor].perihal;
+            document.getElementById("hasilStatus").innerText = dataSurat[nomor].penandatangan;
+            fileUrl = dataSurat[nomor].file;
+            resultBox.style.display = "block";
+        } else {
+            alert("Nomor surat tidak ditemukan.");
+            resultBox.style.display = "none";
+        }
+    }
+
+    function lihatFile() {
+        if (fileUrl) {
+            window.open(fileUrl, "_blank");
+        } else {
+            alert("File tidak tersedia.");
+        }
+    }
+
+    function kirimWA() {
+        const nomor = document.getElementById("nomorSurat").value.trim();
+        if (nomor && dataSurat[nomor]) {
+            const pesan = `Halo, saya ingin menanyakan tentang surat dengan nomor ${nomor} perihal "${dataSurat[nomor].perihal}".`;
+            window.open(`https://wa.me/6285211379911?text=${encodeURIComponent(pesan)}`, "_blank");
+        } else {
+            alert("Nomor surat belum diverifikasi.");
+        }
+    }
+</script>
 </body>
+<footer>
+    &copy; 2025 KKN Desa Sidomulyo 2025.<br>
+    diterbitkan oleh Balai Besar Sertifikasi Elektronik (BSrE)<br>
+    Badan Siber dan Sandi Negara (BSSN)
+  </footer>
 </html>
